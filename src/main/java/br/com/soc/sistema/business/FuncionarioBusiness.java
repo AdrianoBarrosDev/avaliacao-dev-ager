@@ -26,7 +26,7 @@ public class FuncionarioBusiness {
 			if(funcionarioVo.getNome().isEmpty())
 				throw new IllegalArgumentException("Nome nao pode ser em branco");
 			
-			if(funcionarioVo.getRowid() != null) {
+			if(!funcionarioVo.getRowid().isEmpty()) {
 				dao.updateFuncionario(funcionarioVo);
 			} else {
 				dao.insertFuncionario(funcionarioVo);				
