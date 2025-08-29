@@ -26,12 +26,17 @@ public class FuncionarioBusiness {
 			if(funcionarioVo.getNome().isEmpty())
 				throw new IllegalArgumentException("Nome nao pode ser em branco");
 			
-			dao.insertFuncionario(funcionarioVo);
+			if(funcionarioVo.getRowid() != null) {
+				dao.updateFuncionario(funcionarioVo);
+			} else {
+				dao.insertFuncionario(funcionarioVo);				
+			}
+			
 		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
 		
-	}	
+	}
 	
 	public List<FuncionarioVo> filtrarFuncionarios(FuncionarioFilter filter){
 		List<FuncionarioVo> funcionarios = new ArrayList<>();

@@ -50,6 +50,7 @@
 								<td>${rowid}</td>
 								<td>${nome}</td>
 								<td class="text-end">
+								
 									<s:url action="editarFuncionarios" var="editar">
 										<s:param name="funcionarioVo.rowid" value="rowid"></s:param>
 									</s:url>
@@ -61,6 +62,7 @@
 									<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
 										<s:text name="label.excluir"/>
 									</a>
+									
 								</td>
 							</tr>
 						</s:iterator>
