@@ -59,7 +59,7 @@
 										<s:text name="label.editar"/>
 									</a>
 
-									<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
+									<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
 										<s:text name="label.excluir"/>
 									</a>
 									
@@ -106,15 +106,32 @@
 	        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
 					<s:text name="label.nao"/>
 				</a>
+				
+				<s:url action="excluirFuncionarios" var="excluir">
+					<s:param name="funcionarioVo.rowid" value="rowid"></s:param>
+				</s:url>
 	        	
-				<s:a id="excluir" class="btn btn-primary" style="width: 75px;">
+				<s:a href="%{excluir}" id="excluir" class="btn btn-primary" style="width: 75px;">
 					<s:text name="label.sim"/>
-				</s:a>						
+				</s:a>
+				
 		      </div>
 		    </div>		    
 		  </div>
 		</div>
 		
 		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+		<script>
+			
+			var modalConfirmarExclusao = document.getElementById("confirmarExclusao");
+			modalConfirmarExclusao.addEventListener("show.bs.modal", function (event) {
+				
+				var btnAcionado = event.relatedTarget;
+				var btnConfirmar = modalConfirmarExclusao.querySelector("#excluir");
+				btnConfirmar.setAttribute("href", "excluirFuncionarios.action?funcionarioVo.rowid=" + btnAcionado.getAttribute("data-rowid"));
+				
+			});
+		
+		</script>
 	</body>
 </html>

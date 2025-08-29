@@ -29,13 +29,21 @@ public class FuncionarioBusiness {
 			if(!funcionarioVo.getRowid().isEmpty()) {
 				dao.updateFuncionario(funcionarioVo);
 			} else {
-				dao.insertFuncionario(funcionarioVo);				
+				dao.insertFuncionario(funcionarioVo);
 			}
 			
 		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
 		
+	}
+	
+	public void excluirFuncionario(FuncionarioVo funcionarioVo) {
+		try {
+			dao.deleteFuncionario(funcionarioVo);
+		} catch (Exception e) {
+			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
+		}
 	}
 	
 	public List<FuncionarioVo> filtrarFuncionarios(FuncionarioFilter filter){
