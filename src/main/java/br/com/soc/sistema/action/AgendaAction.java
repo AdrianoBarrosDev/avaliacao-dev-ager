@@ -41,6 +41,16 @@ public class AgendaAction extends Action {
 		return INPUT;
 	}
 	
+	public String excluir() {
+		
+		if(agendaVo.getRowid() == null)
+			return REDIRECT;
+		
+		business.excluirAgenda(agendaVo);
+		
+		return REDIRECT;
+	}
+	
 	public List<AgendaVo> getAgendas() {
 		return agendas;
 	}

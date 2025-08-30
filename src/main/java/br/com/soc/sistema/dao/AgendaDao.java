@@ -48,6 +48,21 @@ public class AgendaDao extends Dao {
 		
 	}
 	
+	public void deleteAgenda(AgendaVo agendaVo) {
+		StringBuilder query = new StringBuilder("DELETE FROM agenda WHERE rowid = ?");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setInt(i, Integer.parseInt(agendaVo.getRowid()));
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<AgendaVo> findAllAgendas() {
 		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodoDisponivel FROM agenda");
 		try(

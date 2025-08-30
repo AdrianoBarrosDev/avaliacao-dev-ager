@@ -19,8 +19,9 @@ public class FuncionarioDao extends Dao {
 			PreparedStatement  ps = con.prepareStatement(query.toString())){
 			
 			int i=1;
-			ps.setString(i++, funcionarioVo.getNome());
+			ps.setString(i, funcionarioVo.getNome());
 			ps.executeUpdate();
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +50,7 @@ public class FuncionarioDao extends Dao {
 			PreparedStatement ps = con.prepareStatement(query.toString())) {
 			
 			int i=1;
-			ps.setInt(i++, Integer.parseInt(funcionarioVo.getRowid()));
+			ps.setInt(i, Integer.parseInt(funcionarioVo.getRowid()));
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {

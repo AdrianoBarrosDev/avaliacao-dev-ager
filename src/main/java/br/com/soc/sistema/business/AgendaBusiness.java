@@ -38,6 +38,16 @@ public class AgendaBusiness {
 
 	}
 	
+	public void excluirAgenda(AgendaVo agendaVo) {
+		
+		try {
+			dao.deleteAgenda(agendaVo);
+		} catch (Exception e) {
+			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
+		}
+		
+	}
+	
 	public AgendaVo buscarAgendaPor(String codigo) {
 		
 		try {
