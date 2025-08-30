@@ -30,8 +30,13 @@ public class AgendaVo {
 		return periodoDisponivel;
 	}
 
-	public void setPeriodoDisponivel(OpcoesPeriodoDisponivel periodoDisponivel) {
-		this.periodoDisponivel = periodoDisponivel;
+	public void setPeriodoDisponivel(String codigo) {
+		this.periodoDisponivel = OpcoesPeriodoDisponivel.buscarPorCodigo(codigo);
+	}
+	
+	@Override
+	public String toString() {
+		return "AgendaVo [rowid=" + rowid + ", nome=" + nome + ", periodoDisponivel=" + periodoDisponivel + "]";
 	}
 	
 }

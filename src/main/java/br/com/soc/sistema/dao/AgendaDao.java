@@ -13,6 +13,27 @@ import br.com.soc.sistema.vo.AgendaVo;
 
 public class AgendaDao extends Dao {
 	
+	public void insertAgenda(AgendaVo agendaVo) {
+		StringBuilder query = new StringBuilder("INSERT INTO agenda(nm_agenda, periodoDisponivel) VALUES (?, ?)");
+		try(
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setString(i++, agendaVo.getNome());
+			ps.setString(i++, agendaVo.getPeriodoDisponivel().getCodigo());
+			ps.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void updateAgenda(AgendaVo agendaVo) {
+		
+	}
+	
 	public List<AgendaVo> findAllAgendas() {
 		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodoDisponivel FROM agenda");
 		try(
@@ -27,7 +48,7 @@ public class AgendaDao extends Dao {
 				vo = new AgendaVo();
 				vo.setRowid(rs.getString("id"));
 				vo.setNome(rs.getString("nome"));
-				vo.setPeriodoDisponivel(OpcoesPeriodoDisponivel.buscarPorCodigo(rs.getString("periodoDisponivel")));
+				vo.setPeriodoDisponivel(rs.getString("periodoDisponivel"));
 				agendas.add(vo);
 				
 			}

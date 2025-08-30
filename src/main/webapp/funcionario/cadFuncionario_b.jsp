@@ -24,7 +24,7 @@
 									headerValue="Escolha..." 
 									listKey="%{codigo}" 
 									listValueKey="%{descricao}"
-									value="filtrar.opcoesCombo.codigo"									
+									value="filtrar.opcoesCombo.codigo"								
 								/>
 								
 								<s:textfield cssClass="form-control" id="nome" name="filtrar.valorBusca"/>

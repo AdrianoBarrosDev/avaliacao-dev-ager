@@ -16,7 +16,7 @@ public enum OpcoesPeriodoDisponivel {
 	private final String descricao;
 	private final static Map<String, OpcoesPeriodoDisponivel> opcoes = new HashMap<>(); 
 	
-	// Preenche o map com os valores que eu coloquei
+	// Preenche o map com os valores que eu coloquei no enum
 	static {
 		Arrays.asList(OpcoesPeriodoDisponivel.values())
 		.forEach(
