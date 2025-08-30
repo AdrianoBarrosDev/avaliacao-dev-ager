@@ -14,7 +14,7 @@ public class AgendaAction extends Action {
 	private List<AgendaVo> agendas = new ArrayList<>();
 	private AgendaBusiness business = new AgendaBusiness();
 	private AgendaVo agendaVo = new AgendaVo();
-	private List<OpcoesPeriodoDisponivel> opcoesPeriodo;
+	private List<OpcoesPeriodoDisponivel> opcoesPeriodo = Arrays.asList(OpcoesPeriodoDisponivel.values());
 	
 	public String todos() {
 		agendas.addAll(business.trazerTodasAsAgendas());
@@ -22,8 +22,6 @@ public class AgendaAction extends Action {
 	}
 	
 	public String novo() {
-		
-		opcoesPeriodo = Arrays.asList(OpcoesPeriodoDisponivel.values());
 		
 		if(agendaVo.getNome() == null || agendaVo.getPeriodoDisponivel() == null)
 			return INPUT;
@@ -36,11 +34,11 @@ public class AgendaAction extends Action {
 	public String editar() {
 		
 		if(agendaVo.getRowid() == null)
-			return INPUT;
+			return REDIRECT;
 		
 		agendaVo = business.buscarAgendaPor(agendaVo.getRowid());
 		
-		return REDIRECT;
+		return INPUT;
 	}
 	
 	public List<AgendaVo> getAgendas() {

@@ -63,9 +63,8 @@
 									headerValue="Escolha um Período..."
 									listKey="codigo"
 									listValue="descricao"
-									value="agendaVo.periodoDisponivel"
+									value="agendaVo.periodoDisponivel.codigo"
 								/>
-								<s:property value="agendaVo.periodoDisponivel" />
 							</div>	
 						</div>
 					</div>
