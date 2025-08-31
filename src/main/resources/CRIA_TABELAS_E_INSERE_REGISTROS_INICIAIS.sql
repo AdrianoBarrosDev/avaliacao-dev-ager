@@ -21,4 +21,4 @@ CREATE TABLE compromisso (
 
 INSERT INTO funcionario (nm_funcionario) VALUES ('João'), ('Maria'), ('José'), ('Joana');
 INSERT INTO agenda(nm_agenda, periodoDisponivel) VALUES ('Agenda Clínica Odontológica', '1'), ('Agenda Clínica Cardiológica', '2');
-INSERT INTO compromisso(codigoFuncionario, codigoAgenda, data, horario) VALUES (1, 1, '2025-05-03', '13:42');
+INSERT INTO compromisso(codigoFuncionario, codigoAgenda, data, horario) VALUES (1, 1, '2025-09-12', '13:30');

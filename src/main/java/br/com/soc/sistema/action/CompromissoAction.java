@@ -27,6 +27,15 @@ public class CompromissoAction extends Action {
 		return REDIRECT;
 	}
 	
+	public String editar() {
+		if(compromissoVo.getRowid() == null)
+			return REDIRECT;
+		
+		compromissoVo = business.buscarCompromissoPor(compromissoVo.getRowid());
+		
+		return INPUT;
+	}
+	
 	public List<CompromissoVo> getCompromissos() {
 		return compromissos;
 	}

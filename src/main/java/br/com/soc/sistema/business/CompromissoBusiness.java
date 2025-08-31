@@ -7,7 +7,8 @@ import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.vo.CompromissoVo;
 
 public class CompromissoBusiness {
-
+	
+	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caracter no lugar de um numero";
 	private CompromissoDao dao;
 	
 	public CompromissoBusiness() {
@@ -30,6 +31,15 @@ public class CompromissoBusiness {
 			}
 		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
+		}
+	}
+	
+	public CompromissoVo buscarCompromissoPor(String codigo) {
+		try {
+			Long cod = Long.parseLong(codigo);
+			return dao.findByCodigo(cod);
+		} catch (NumberFormatException e) {
+			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
 		}
 	}
 	
