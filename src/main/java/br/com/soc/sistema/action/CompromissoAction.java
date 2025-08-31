@@ -1,0 +1,37 @@
+package br.com.soc.sistema.action;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.soc.sistema.business.CompromissoBusiness;
+import br.com.soc.sistema.infra.Action;
+import br.com.soc.sistema.vo.CompromissoVo;
+
+public class CompromissoAction extends Action {
+
+	private List<CompromissoVo> compromissos = new ArrayList<>();
+	private CompromissoVo compromissoVo = new CompromissoVo();
+	private CompromissoBusiness business = new CompromissoBusiness();
+	
+	public String todos() {
+		compromissos.addAll(business.trazerTodosOsCompromissos());
+		return SUCCESS;
+	}
+	
+	public List<CompromissoVo> getCompromissos() {
+		return compromissos;
+	}
+	
+	public void setCompromissos(List<CompromissoVo> compromissos) {
+		this.compromissos = compromissos;
+	}
+	
+	public CompromissoVo getCompromissoVo() {
+		return compromissoVo;
+	}
+	
+	public void setCompromissoVo(CompromissoVo compromissoVo) {
+		this.compromissoVo = compromissoVo;
+	}
+	
+}

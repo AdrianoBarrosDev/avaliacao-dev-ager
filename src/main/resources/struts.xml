@@ -23,6 +23,12 @@
             <result name="input">/agenda/cadAgenda_i.jsp</result>
         	<result name="redirect" type="redirectAction">todosAgendas</result>
         </action>
+        
+        <action name="*Compromissos" class="br.com.soc.sistema.action.CompromissoAction" method="{1}">
+        	<result name="success">/compromisso/cadCompromisso_b.jsp</result>
+            <result name="input">/compromisso/cadCompromisso_i.jsp</result>
+        	<result name="redirect" type="redirectAction">todosCompromisso</result>
+        </action>
     </package>
 
 </struts>
