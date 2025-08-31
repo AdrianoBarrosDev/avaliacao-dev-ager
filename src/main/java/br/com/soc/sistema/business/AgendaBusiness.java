@@ -1,9 +1,11 @@
 package br.com.soc.sistema.business;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import br.com.soc.sistema.dao.AgendaDao;
 import br.com.soc.sistema.exception.BusinessException;
+import br.com.soc.sistema.infra.OpcoesPeriodoDisponivel;
 import br.com.soc.sistema.vo.AgendaVo;
 
 public class AgendaBusiness {
@@ -46,6 +48,26 @@ public class AgendaBusiness {
 			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
 		}
 		
+	}
+	
+	public boolean verificarHorarioPermitidoAgenda(String codigoAgenda, String horarioStr) {
+		AgendaVo vo = buscarAgendaPor(codigoAgenda);
+		
+		try {
+			LocalTime horario = LocalTime.parse(horarioStr);
+			
+			if(vo.getPeriodoDisponivel().equals(OpcoesPeriodoDisponivel.MANHA)) {
+				return !horario.isBefore(LocalTime.of(8, 0)) && horario.isBefore(LocalTime.of(12, 0));
+			} else if(vo.getPeriodoDisponivel().equals(OpcoesPeriodoDisponivel.TARDE)) {
+				return !horario.isBefore(LocalTime.of(12, 0)) && horario.isBefore(LocalTime.of(18, 0));
+			} else if(vo.getPeriodoDisponivel().equals(OpcoesPeriodoDisponivel.AMBOS)) {
+				return !horario.isBefore(LocalTime.of(8, 0)) && horario.isBefore(LocalTime.of(18, 0));
+			}
+			
+		} catch(Exception e) {
+			throw new BusinessException("Nao foi possivel utilizar o horario");
+		}
+		return false;
 	}
 	
 	public AgendaVo buscarAgendaPor(String codigo) {

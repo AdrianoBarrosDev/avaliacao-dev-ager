@@ -24,11 +24,19 @@ public class CompromissoBusiness {
 			if(compromissoVo.getCodigoAgenda().isEmpty() || compromissoVo.getCodigoFuncionario().isEmpty()) 
 				throw new IllegalArgumentException("Codigo da agenda e do funcionario nao pode ser em branco");
 			
+			AgendaBusiness agendaBusiness = new AgendaBusiness();
+			if(!agendaBusiness.verificarHorarioPermitidoAgenda(compromissoVo.getCodigoAgenda(), compromissoVo.getHorario())) {
+				throw new BusinessException("Horario invalido para essa agenda");
+			}
+			
 			if(compromissoVo.getRowid().isEmpty()) {
 				dao.insertCompromisso(compromissoVo);
 			} else {
 				dao.updateCompromisso(compromissoVo);
 			}
+			
+		} catch (BusinessException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
