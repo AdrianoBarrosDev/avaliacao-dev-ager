@@ -15,8 +15,8 @@ CREATE TABLE compromisso (
 	codigoAgenda bigint,
 	data DATE,
 	horario TIME,
-	CONSTRAINT fk_codigoFuncionario FOREIGN KEY(codigoFuncionario) REFERENCES funcionario(rowid),
-	CONSTRAINT fk_codigoAgenda FOREIGN KEY(codigoAgenda) REFERENCES agenda(rowid)
+	CONSTRAINT fk_codigoFuncionario FOREIGN KEY(codigoFuncionario) REFERENCES funcionario(rowid) ON DELETE CASCADE,
+	CONSTRAINT fk_codigoAgenda FOREIGN KEY(codigoAgenda) REFERENCES agenda(rowid) ON DELETE RESTRICT
 );
 
 INSERT INTO funcionario (nm_funcionario) VALUES ('João'), ('Maria'), ('José'), ('Joana');
