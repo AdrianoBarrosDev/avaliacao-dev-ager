@@ -97,7 +97,7 @@
 				</a>
 				
 				<s:url action="excluirCompromissos" var="excluir">
-					<s:param name="agendaVo.rowid" value="rowid"></s:param>
+					<s:param name="compromissoVo.rowid" value="rowid"></s:param>
 				</s:url>
 	        	
 				<s:a href="%{excluir}" id="excluir" class="btn btn-primary" style="width: 75px;">
@@ -117,7 +117,7 @@
 				
 				var btnAcionado = event.relatedTarget;
 				var btnConfirmar = modalConfirmarExclusao.querySelector("#excluir");
-				btnConfirmar.setAttribute("href", "excluirCompromissos.action?agendaVo.rowid=" + btnAcionado.getAttribute("data-rowid"));
+				btnConfirmar.setAttribute("href", "excluirCompromissos.action?compromissoVo.rowid=" + btnAcionado.getAttribute("data-rowid"));
 				
 			});
 		

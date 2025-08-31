@@ -54,6 +54,21 @@ public class CompromissoDao extends Dao {
 		
 	}
 	
+	public void deleteCompromisso(CompromissoVo compromissoVo) {
+		StringBuilder query = new StringBuilder("DELETE FROM compromisso WHERE rowid = ?");
+		try(
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setLong(i, Long.parseLong(compromissoVo.getRowid()));
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<CompromissoVo> findAllCompromissos() {
 		StringBuilder query = new StringBuilder("SELECT rowid id, codigoFuncionario, codigoAgenda, data, horario FROM compromisso");
 		try (

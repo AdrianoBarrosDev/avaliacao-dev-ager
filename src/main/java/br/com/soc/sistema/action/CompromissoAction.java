@@ -36,6 +36,15 @@ public class CompromissoAction extends Action {
 		return INPUT;
 	}
 	
+	public String excluir() {
+		if(compromissoVo.getRowid() == null)
+			return REDIRECT;
+		
+		business.excluirCompromisso(compromissoVo);
+		
+		return REDIRECT;
+	}
+	
 	public List<CompromissoVo> getCompromissos() {
 		return compromissos;
 	}

@@ -34,6 +34,14 @@ public class CompromissoBusiness {
 		}
 	}
 	
+	public void excluirCompromisso(CompromissoVo compromissoVo) {
+		try {
+			dao.deleteCompromisso(compromissoVo);
+		} catch (Exception e) {
+			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
+		}
+	}
+	
 	public CompromissoVo buscarCompromissoPor(String codigo) {
 		try {
 			Long cod = Long.parseLong(codigo);
