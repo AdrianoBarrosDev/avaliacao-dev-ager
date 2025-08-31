@@ -11,18 +11,18 @@
 	<body class="bg-secondary">
 
 		<div class="container">
-			<s:form action="/novoAgendas.action">
+			<s:form action="/novoCompromissos.action">
 
 				<div class="card mt-5">
 					<div class="card-header">
 						<div class="row">
 							<div class="col-sm-5">
-								<s:url action="todosAgendas" var="todos"/>
-								<a href="${todos}" class="btn btn-success" >Agendas</a>
+								<s:url action="todosCompromissos" var="todos"/>
+								<a href="${todos}" class="btn btn-success" >Compromissos</a>
 							</div>
 							
 							<div class="col-sm">
-								<h5 class="card-title">Nova Agenda</h5>
+								<h5 class="card-title">Novo Compromisso</h5>
 							</div>
 						</div>
 					</div>
@@ -34,37 +34,47 @@
 							</label>	
 
 							<div class="col-sm-2">
-								<s:textfield cssClass="form-control" id="id" name="agendaVo.rowid" readonly="true"/>							
+								<s:textfield cssClass="form-control" id="id" name="compromissoVo.rowid" readonly="true"/>							
 							</div>	
 						</div>
 						
 						<div class="row align-items-center mt-3">
 							<label for="nome" class="col-sm-2 col-form-label text-center">
-								<s:text name="label.nome" />
+								<s:text name="label.codigoFuncionario" />
 							</label>
 
 							<div class="col-sm-5">
-								<s:textfield cssClass="form-control" id="nome" name="agendaVo.nome"/>							
+								<s:textfield cssClass="form-control" id="codigoFuncionario" name="compromissoVo.codigoFuncionario"/>							
 							</div>	
 						</div>
 						
 						<div class="row align-items-center mt-3">
-							<label for="periodoDisponivel" class="col-sm-2 col-form-label text-center">
-								<s:text name="label.periodoDisponivel" />
+							<label for="nome" class="col-sm-2 col-form-label text-center">
+								<s:text name="label.codigoAgenda" />
 							</label>
 
 							<div class="col-sm-5">
-								<s:select 
-									cssClass="form-select" 
-									name="agendaVo.periodoDisponivel"		
-									list="opcoesPeriodo"					
-									id="periodoDisponivel"
-									headerKey=""
-									headerValue="Escolha um Período..."
-									listKey="codigo"
-									listValue="descricao"
-									value="agendaVo.periodoDisponivel.codigo"
-								/>
+								<s:textfield cssClass="form-control" id="codigoAgenda" name="compromissoVo.codigoAgenda"/>							
+							</div>	
+						</div>
+						
+						<div class="row align-items-center mt-3">
+							<label for="nome" class="col-sm-2 col-form-label text-center">
+								<s:text name="label.data" />
+							</label>
+
+							<div class="col-sm-5">
+								<s:textfield cssClass="form-control" type="date" id="data" name="compromissoVo.data"/>							
+							</div>	
+						</div>
+						
+						<div class="row align-items-center mt-3">
+							<label for="nome" class="col-sm-2 col-form-label text-center">
+								<s:text name="label.horario" />
+							</label>
+
+							<div class="col-sm-5">
+								<s:textfield cssClass="form-control" type="time" id="horario" name="compromissoVo.horario"/>							
 							</div>	
 						</div>
 					</div>

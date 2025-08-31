@@ -2,21 +2,24 @@ package br.com.soc.sistema.vo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class CompromissoVo {
-
+	
+	private String rowid;
 	private String codigoFuncionario;
 	private String codigoAgenda;
-	private LocalDate data;
-	private LocalTime horario;
+	private String data;
+	private String horario;
 	
 	public CompromissoVo() {}
 
-	public CompromissoVo(String codigoFuncionario, String codigoAgenda, LocalDate data, LocalTime horario) {
-		this.codigoFuncionario = codigoFuncionario;
-		this.codigoAgenda = codigoAgenda;
-		this.data = data;
-		this.horario = horario;
+	public String getRowid() {
+		return rowid;
+	}
+
+	public void setRowid(String rowid) {
+		this.rowid = rowid;
 	}
 
 	public String getCodigoFuncionario() {
@@ -35,19 +38,19 @@ public class CompromissoVo {
 		this.codigoAgenda = codigoAgenda;
 	}
 
-	public LocalDate getData() {
+	public String getData() {
 		return data;
 	}
-
-	public void setData(LocalDate data) {
+	
+	public void setData(String data) {
 		this.data = data;
 	}
 
-	public LocalTime getHorario() {
+	public String getHorario() {
 		return horario;
 	}
-
-	public void setHorario(LocalTime horario) {
+	
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 	

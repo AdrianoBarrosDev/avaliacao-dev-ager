@@ -18,6 +18,15 @@ public class CompromissoAction extends Action {
 		return SUCCESS;
 	}
 	
+	public String novo() {
+		if(compromissoVo.getCodigoAgenda() == null || compromissoVo.getCodigoFuncionario() == null || compromissoVo.getData() == null || compromissoVo.getHorario() == null)
+			return INPUT;
+		
+		business.salvarCompromisso(compromissoVo);
+		
+		return REDIRECT;
+	}
+	
 	public List<CompromissoVo> getCompromissos() {
 		return compromissos;
 	}
