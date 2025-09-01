@@ -1,5 +1,6 @@
 package br.com.soc.sistema.business;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.soc.sistema.dao.CompromissoDao;
@@ -46,7 +47,7 @@ public class CompromissoBusiness {
 		try {
 			dao.deleteCompromisso(compromissoVo);
 		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
+			throw new BusinessException("Nao foi possivel realizar a exclusao do registro");
 		}
 	}
 	
@@ -56,6 +57,20 @@ public class CompromissoBusiness {
 			return dao.findByCodigo(cod);
 		} catch (NumberFormatException e) {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
+		}
+	}
+	
+	public List<CompromissoVo> filtrarCompromissos(String dataInicialStr, String dataFinalStr) {
+		try {
+			if(dataInicialStr.isEmpty() || dataFinalStr.isEmpty())
+				throw new IllegalArgumentException("As datas nao podem ser em branco");
+			
+			LocalDate dataInicial = LocalDate.parse(dataInicialStr);
+			LocalDate dataFinal = LocalDate.parse(dataFinalStr);
+			return dao.buscarPorPeriodo(dataInicial, dataFinal);
+			
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 	

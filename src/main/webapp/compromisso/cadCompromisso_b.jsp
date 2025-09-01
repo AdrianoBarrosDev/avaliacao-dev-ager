@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF8">
+		<meta charset="UTF-8">
 		<title><s:text name="label.titulo.pagina.consulta"/></title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
 	</head>
@@ -59,11 +59,16 @@
 					
 					<tfoot class="table-secondary">
 						<tr>
-							<td colspan="6">
+							<td colspan="3">
 								<s:url action="novoCompromissos" var="novo"/>
 								
 								<a href="${novo}" class="btn btn-success">
 									<s:text name="label.novo"/>
+								</a>
+							</td>
+							<td colspan="3" class="text-end">
+								<a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#inserirDatasRelatorio">
+									<s:text name="label.gerarRelatorio"/>
 								</a>
 							</td>
 						</tr>
@@ -109,6 +114,57 @@
 		  </div>
 		</div>
 		
+		<div  class="modal fade" id="inserirDatasRelatorio" 
+			data-bs-backdrop="static" data-bs-keyboard="false"
+			tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title"><s:text name="label.modal.tituloRelatorioCompromissos"/></h5>
+		        
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      
+		      <div class="modal-body d-flex justify-content-around align-items-center">
+		      
+		      		<div class="d-flex justify-content-around align-items-center flex-column col-5">
+		      			<label for="dataInicial" class="col-form-label text-center">
+							<s:text name="label.dataInicial" />
+						</label>
+	
+						<div class="col-sm-10">
+							<input type="date" class="form-control" id="dataInicial" name="dataInicial">					
+						</div>
+		      		</div>
+		      
+      				<div class="d-flex justify-content-around align-items-center flex-column col-5">
+      				
+	      				<label for="dataFinal" class="col-form-label text-center">
+							<s:text name="label.dataFinal" />
+						</label>
+	
+						<div class="col-sm-10">
+							<input type="date" class="form-control" id="dataFinal" name="dataFinal">				
+						</div>
+      				
+      				</div>
+
+		      </div>
+		      
+		      <div class="modal-footer">
+	        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+					<s:text name="label.cancelar"/>
+				</a>
+	        	
+				<a href="#" id="filtrarRelatorio" class="btn btn-primary" style="width: 125px;">
+					<s:text name="label.continuar"/>
+				</a>
+				
+		      </div>
+		    </div>		    
+		  </div>
+		</div>
+		
 		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 		<script>
 			
@@ -122,5 +178,30 @@
 			});
 		
 		</script>
+		
+		<script>
+			
+			document.getElementById("filtrarRelatorio").addEventListener("click", function() {
+
+				const dataInicial = document.getElementById("dataInicial").value;
+				const dataFinal = document.getElementById("dataFinal").value;
+				
+				if (!dataInicial || !dataFinal) {
+					alert("As datas não podem estar vazias");
+					return;
+				}
+				
+				if(dataInicial > dataFinal) {
+					alert("A data inicial deve ser menor que a data final");
+					return;
+				}
+				
+				const url = "filtrarRelatorioCompromisso.action?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal;
+				window.open(url, "_blank");
+				
+			});
+		
+		</script>
+		
 	</body>
 </html>

@@ -8,7 +8,9 @@ public class CompromissoVo {
 	
 	private String rowid;
 	private String codigoFuncionario;
+	private String nomeFuncionario;
 	private String codigoAgenda;
+	private String nomeAgenda;
 	private String data;
 	private String horario;
 	
@@ -30,12 +32,28 @@ public class CompromissoVo {
 		this.codigoFuncionario = codigoFuncionario;
 	}
 
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
+	}
+
 	public String getCodigoAgenda() {
 		return codigoAgenda;
 	}
 
 	public void setCodigoAgenda(String codigoAgenda) {
 		this.codigoAgenda = codigoAgenda;
+	}
+
+	public String getNomeAgenda() {
+		return nomeAgenda;
+	}
+
+	public void setNomeAgenda(String nomeAgenda) {
+		this.nomeAgenda = nomeAgenda;
 	}
 
 	public String getData() {
