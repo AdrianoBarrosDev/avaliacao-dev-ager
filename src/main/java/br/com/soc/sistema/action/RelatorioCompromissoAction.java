@@ -20,7 +20,7 @@ public class RelatorioCompromissoAction extends Action {
 			return REDIRECT;
 		
 		compromissos = business.filtrarCompromissosRelatorio(dataInicial, dataFinal);
-		business.gerarRelatorioXLSX(dataInicial, dataFinal);
+		business.gerarRelatorioXLSX(dataInicial, dataFinal, compromissos);
 		
 		return SUCCESS;
 	}
