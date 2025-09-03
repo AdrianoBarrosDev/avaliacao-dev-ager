@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Quicksand:wght@300..700&display=swap');
+
+.sidebar {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-direction: column;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 260px;
+	height: 100vh;
+	border-right: 2px solid #F0F7FF;
+	padding: 50px 20px 20px 20px;
+	gap: 150px;
+}
+
+.sidebar a {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	width: 165px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 0px 5px 10px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: "Lato";
+	margin-bottom: 15px;
+}
+
+.sidebar a.ativado {
+	background-color: #46A6AF;
+	color: white;
+}
+
+.sidebar a.ativado img {
+	filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(82deg) brightness(113%) contrast(101%);
+}
+
+.sidebar a.desativado {
+	color: #C7C7C7;
+}
+
+.sidebar a.desativado img {
+	filter: invert(100%) sepia(0%) saturate(83%) hue-rotate(232deg) brightness(87%) contrast(76%);
+}
+
+.sidebar a.desativado:hover {
+	background-color: #FAFAFA;
+}

@@ -3,10 +3,9 @@ package br.com.soc.sistema.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.soc.sistema.business.CompromissoBusiness;
+import br.com.soc.sistema.business.RelatorioCompromissoBusiness;
 import br.com.soc.sistema.infra.Action;
 import br.com.soc.sistema.vo.CompromissoVo;
-import br.com.soc.sistema.vo.RelatorioCompromissoVo;
 
 public class RelatorioCompromissoAction extends Action {
 
@@ -14,14 +13,14 @@ public class RelatorioCompromissoAction extends Action {
 	private String dataInicial;
 	private String dataFinal;
 	private List<CompromissoVo> compromissos = new ArrayList<>();
-	private CompromissoBusiness business = new CompromissoBusiness();
+	private RelatorioCompromissoBusiness business = new RelatorioCompromissoBusiness();
 	
-	
-	public String filtrar() {
+	public String novo() {
 		if(dataInicial == null || dataFinal == null)
 			return REDIRECT;
 		
-		compromissos = business.filtrarCompromissos(dataInicial, dataFinal);
+		compromissos = business.filtrarCompromissosRelatorio(dataInicial, dataFinal);
+		business.gerarRelatorioXLSX(dataInicial, dataFinal);
 		
 		return SUCCESS;
 	}

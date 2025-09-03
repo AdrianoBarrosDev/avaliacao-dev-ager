@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+h1 {
+	color: #46A6AF;
+	font-size: 80px;
+	font-family: "Poppins";
+	font-weight: bold;
+	margin-bottom: 80px;
+}
+
+.logoNavSoc {
+	width: 185px;
+	height: 65px;
+	margin-top: 60px;
+}
+
+.tabela-wrapper {
+  width: 100%;
+}
+
+.tabela-scroll-body {
+  max-height: 425px;
+  overflow-y: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+  font-family: "Poppins";
+  
+  td {
+  	color: rgba(48, 48, 48, 0.8);
+  	height: 60px;
+  }
+  
+}
+
+.tabela th,
+.tabela td {
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.tabela thead th {
+  font-weight: 500;
+  color: rgba(48, 48, 48, 0.4);
+}
+
+.headerRelatorio thead th {
+	font-weight: 500;
+  	color: rgba(0, 0, 0, 0.8);
+  	font-weight: bold;
+}
+
+.colunaId {
+	width: 60px;
+}
+
+.btnNovo {
+	background-color: #46A6AF;
+	width: 200px;
+	font-family: "Poppins";
+	font-size: 20px;
+	color: white;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+.btnNovo:hover {
+	color: white;
+}
+
+.btnTransparente {
+	background-color: transparent;
+	width: 225px;
+	font-family: "Poppins";
+	font-size: 20px;
+	font-weight: bold;
+	color: #46A6AF;
+	text-decoration: none;
+	display: inline-block;
+	text-align: end;
+	padding: 5px 10px;
+	border-radius: 5px;
+	
+}
+
+
+@media(max-width: 1000px) {
+		
+	.tabela {
+		font-size: 1.5vw;	
+	}
+		
+}
