@@ -15,7 +15,7 @@
 		
 			<nav class="sidebar">
 			
-				<img src="/avaliacao/imagens/LogoSocNav.png" />
+				<img class="logoNavSoc" src="/avaliacao/imagens/LogoSocNav.png" />
 			
 				<div>
 					<a href="todosFuncionarios.action" class="ativado gap-3">
@@ -36,7 +36,7 @@
 
 			<div class="container-fluid p-5" style="margin-left: 260px;">
 				
-				<h1 class="mt-5">Novo Funcionário</h1>
+				<h1 class="mt-4">Novo Funcionário</h1>
 			
 				<s:form action="/novoFuncionarios.action">
 	

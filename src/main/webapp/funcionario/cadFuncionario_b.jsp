@@ -38,27 +38,38 @@
 			
 				<h1 class="mt-4">Funcionários</h1>
 			
-				<div class="row mb-2">
-					<div class="col-sm p-0">
+				<div class="row mb-4">
+					<div>
 						<s:form action="/filtrarFuncionarios.action">
-							<div class="input-group">
-								<span class="input-group-text">
-									<strong><s:text name="label.buscar.por"/></strong>
-								</span>	
-									<s:select  
-										cssClass="form-select" 
-										name="filtrar.opcoesCombo" 
-										list="listaOpcoesCombo"  
-										headerKey=""  
-										headerValue="Escolha..." 
-										listKey="%{codigo}" 
-										listValueKey="%{descricao}"
-										value="filtrar.opcoesCombo.codigo"								
-									/>
-									
-									<s:textfield cssClass="form-control" id="nome" name="filtrar.valorBusca"/>
-									<button class="btn btn-primary" type="submit"><s:text name="label.pesquisar"/></button>
+							
+							<div class="d-flex justify-content-start align-items-center gap-5" style="height: 40px">
+							
+								<div class="input-group" style="width: auto">
+								    <span class="input-group-text">
+								        <strong><s:text name="label.buscar.por"/></strong>
+								    </span>
+								
+								    <s:select  
+								        cssClass="form-select opcoesFiltrar" 
+								        name="filtrar.opcoesCombo" 
+								        list="listaOpcoesCombo"  
+								        headerKey=""  
+								        headerValue="Escolha..." 
+								        listKey="%{codigo}" 
+								        listValue="%{descricao}"
+								        value="filtrar.opcoesCombo.codigo"								
+								    />
+								</div>
+							
+								<div class="input-group">
+									<s:textfield cssClass="form-control inputPesquisar" id="nome" name="filtrar.valorBusca"/>
+									<button class="btnPesquisar" type="submit">
+										<img src="/avaliacao/imagens/PesquisarIcon.png" />
+									</button>
+								</div>
+								
 							</div>
+							
 						</s:form>			
 					</div>				
 				</div>
@@ -82,18 +93,18 @@
 									<tr>
 										<td class="colunaId">${rowid}</td>
 										<td>${nome}</td>
-										<td class="text-end">
+										<td class="d-flex justify-content-end align-items-center gap-2">
 										
 											<s:url action="editarFuncionarios" var="editar">
 												<s:param name="funcionarioVo.rowid" value="rowid"></s:param>
 											</s:url>
 		
-											<a href="${editar}" class="btn btn-warning text-white">
-												<s:text name="label.editar"/>
+											<a href="${editar}" class="btnAcao">
+												<img class="imgAcao" src="/avaliacao/imagens/EditarIcon.png" />
 											</a>
 		
-											<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
-												<s:text name="label.excluir"/>
+											<a href="#" class="btnAcao" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
+												<img class="imgAcao" src="/avaliacao/imagens/DeletarIcon.png" />
 											</a>
 											
 										</td>

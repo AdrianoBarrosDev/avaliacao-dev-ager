@@ -16,7 +16,7 @@
 		
 			<nav class="sidebar">
 			
-				<img src="/avaliacao/imagens/LogoSocNav.png" />
+				<img class="logoNavSoc" src="/avaliacao/imagens/LogoSocNav.png" />
 			
 				<div>
 					<a href="todosFuncionarios.action" class="desativado gap-3">
@@ -37,7 +37,7 @@
 
 			<div class="container-fluid p-5" style="margin-left: 260px;">
 			
-				<h1 class="mt-5">Nova Agenda</h1>
+				<h1 class="mt-4">Nova Agenda</h1>
 				
 				<s:form action="/novoAgendas.action">
 	
