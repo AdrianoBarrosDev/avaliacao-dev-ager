@@ -72,18 +72,18 @@
 										<td>${codigoAgenda}</td>
 										<td>${data}</td>
 										<td>${horario}</td>
-										<td class="text-end">
+										<td class="d-flex justify-content-end align-items-center gap-2">
 										
 											<s:url action="editarCompromissos" var="editar">
 												<s:param name="compromissoVo.rowid" value="rowid"></s:param>
 											</s:url>
 		
-											<a href="${editar}" class="btn btn-warning text-white">
-												<s:text name="label.editar"/>
+											<a href="${editar}" class="btnAcao">
+												<img class="imgAcao" src="/avaliacao/imagens/EditarIcon.png" />
 											</a>
 		
-											<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
-												<s:text name="label.excluir"/>
+											<a href="#" class="btnAcao" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
+												<img class="imgAcao" src="/avaliacao/imagens/DeletarIcon.png" />
 											</a>
 											
 										</td>
