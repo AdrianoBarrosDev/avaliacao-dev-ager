@@ -51,12 +51,18 @@ public class FuncionarioBusiness {
 		
 		switch (filter.getOpcoesCombo()) {
 			case ID:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return funcionarios;
+				}
+				
 				try {
-					Integer codigo = Integer.parseInt(filter.getValorBusca());
+					Long codigo = Long.parseLong(filter.getValorBusca());
 					funcionarios.add(dao.findByCodigo(codigo));
-				}catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
 				}
+				
 			break;
 
 			case NOME:
@@ -69,7 +75,7 @@ public class FuncionarioBusiness {
 	
 	public FuncionarioVo buscarFuncionarioPor(String codigo) {
 		try {
-			Integer cod = Integer.parseInt(codigo);
+			Long cod = Long.parseLong(codigo);
 			return dao.findByCodigo(cod);
 		}catch (NumberFormatException e) {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);

@@ -39,7 +39,7 @@ public class AgendaDao extends Dao {
 			int i=1;
 			ps.setString(i++, agendaVo.getNome());
 			ps.setString(i++, agendaVo.getPeriodoDisponivel().getCodigo());
-			ps.setInt(i++, Integer.parseInt(agendaVo.getRowid()));
+			ps.setLong(i++, Long.parseLong(agendaVo.getRowid()));
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -55,7 +55,7 @@ public class AgendaDao extends Dao {
 			PreparedStatement ps = con.prepareStatement(query.toString())) {
 			
 			int i=1;
-			ps.setInt(i, Integer.parseInt(agendaVo.getRowid()));
+			ps.setLong(i, Long.parseLong(agendaVo.getRowid()));
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -90,7 +90,7 @@ public class AgendaDao extends Dao {
 		
 	}
 	
-	public AgendaVo findByCodigo(Integer codigo) {
+	public AgendaVo findByCodigo(Long codigo) {
 		
 		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodoDisponivel FROM agenda ")
 								.append("WHERE rowid = ?");
@@ -99,7 +99,7 @@ public class AgendaDao extends Dao {
 			PreparedStatement ps = con.prepareStatement(query.toString())) {
 			
 			int i=1;
-			ps.setInt(i, codigo);
+			ps.setLong(i, codigo);
 			
 			try(ResultSet rs = ps.executeQuery()) {
 				
