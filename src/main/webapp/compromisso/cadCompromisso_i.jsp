@@ -55,42 +55,42 @@
 							</div>
 							
 							<div class="row align-items-center mt-3">
-								<label for="nome" class="col-sm-2 col-form-label text-center">
+								<label for="codigoFuncionario" class="col-sm-2 col-form-label text-center">
 									<s:text name="label.codigoFuncionario" />
 								</label>
 	
 								<div class="col-sm-5">
-									<s:textfield cssClass="form-control" id="codigoFuncionario" name="compromissoVo.codigoFuncionario"/>							
+									<s:textfield cssClass="form-control" id="codigoFuncionario" name="compromissoVo.codigoFuncionario" required="true" />							
 								</div>	
 							</div>
 							
 							<div class="row align-items-center mt-3">
-								<label for="nome" class="col-sm-2 col-form-label text-center">
+								<label for="codigoAgenda" class="col-sm-2 col-form-label text-center">
 									<s:text name="label.codigoAgenda" />
 								</label>
 	
 								<div class="col-sm-5">
-									<s:textfield cssClass="form-control" id="codigoAgenda" name="compromissoVo.codigoAgenda"/>							
+									<s:textfield cssClass="form-control" id="codigoAgenda" name="compromissoVo.codigoAgenda" required="true" />							
 								</div>	
 							</div>
 							
 							<div class="row align-items-center mt-3">
-								<label for="nome" class="col-sm-2 col-form-label text-center">
+								<label for="data" class="col-sm-2 col-form-label text-center">
 									<s:text name="label.data" />
 								</label>
 	
 								<div class="col-sm-5">
-									<s:textfield cssClass="form-control" type="date" id="data" name="compromissoVo.data"/>							
+									<s:textfield cssClass="form-control" type="date" id="data" name="compromissoVo.data" required="true" />							
 								</div>	
 							</div>
 							
 							<div class="row align-items-center mt-3">
-								<label for="nome" class="col-sm-2 col-form-label text-center">
+								<label for="horario" class="col-sm-2 col-form-label text-center">
 									<s:text name="label.horario" />
 								</label>
 	
 								<div class="col-sm-5">
-									<s:textfield cssClass="form-control" type="time" id="horario" name="compromissoVo.horario"/>							
+									<s:textfield cssClass="form-control" type="time" id="horario" name="compromissoVo.horario" required="true" />							
 								</div>	
 							</div>
 						</div>

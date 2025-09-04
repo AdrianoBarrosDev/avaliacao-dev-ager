@@ -60,7 +60,7 @@
 								</label>
 	
 								<div class="col-sm-5">
-									<s:textfield cssClass="form-control" id="nome" name="agendaVo.nome"/>							
+									<s:textfield cssClass="form-control" id="nome" name="agendaVo.nome" required="true" />							
 								</div>	
 							</div>
 							
@@ -80,6 +80,7 @@
 										listKey="codigo"
 										listValue="descricao"
 										value="agendaVo.periodoDisponivel.codigo"
+									 	required="true"
 									/>
 								</div>	
 							</div>
