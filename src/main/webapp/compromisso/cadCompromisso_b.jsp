@@ -11,7 +11,11 @@
 	</head>
 	<body>
 	
-		<div class="d-flex justify-content-start aling-items-start w-100">
+		<div class="background-container justify-content-end align-items-center">
+		    <img src="/avaliacao/imagens/LogoBackground.png" class="background-image" style="height: 120%"/>
+		</div>
+		
+		<div class="d-flex justify-content-start aling-items-start w-100" style="position: relative; z-index: 1;">
 			
 			<nav class="sidebar">
 		
@@ -58,12 +62,13 @@
 							        headerValue="Escolha..." 
 							        listKey="%{codigo}" 
 							        listValue="%{descricao}"
-							        value="filtrar.opcoesCombo.codigo"								
+							        value="filtrar.opcoesCombo.codigo"
+							        required="true"							
 							    />
 							</div>
 						
 							<div class="input-group">
-								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca"/>
+								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca" required="true" />
 								<button class="btnPesquisar" type="submit">
 									<img src="/avaliacao/imagens/PesquisarIcon.png" />
 								</button>
@@ -99,20 +104,22 @@
 										<td>${codigoAgenda}</td>
 										<td>${data}</td>
 										<td>${horario}</td>
-										<td class="d-flex justify-content-end align-items-center gap-2">
-										
-											<s:url action="editarCompromissos" var="editar">
-												<s:param name="compromissoVo.rowid" value="rowid"></s:param>
-											</s:url>
-		
-											<a href="${editar}" class="btnAcao">
-												<img class="imgAcao" src="/avaliacao/imagens/EditarIcon.png" />
-											</a>
-		
-											<a href="#" class="btnAcao" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
-												<img class="imgAcao" src="/avaliacao/imagens/DeletarIcon.png" />
-											</a>
-											
+										<td>
+											<div class="d-flex justify-content-end align-items-center gap-2">
+												
+												<s:url action="editarCompromissos" var="editar">
+													<s:param name="compromissoVo.rowid" value="rowid"></s:param>
+												</s:url>
+			
+												<a href="${editar}" class="btnAcao">
+													<img class="imgAcao" src="/avaliacao/imagens/EditarIcon.png" />
+												</a>
+			
+												<a href="#" class="btnAcao" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
+													<img class="imgAcao" src="/avaliacao/imagens/DeletarIcon.png" />
+												</a>
+												
+											</div>
 										</td>
 									</tr>
 								</s:iterator>
@@ -139,91 +146,91 @@
 				</div>
 				
 			</div>
-			
-			<div  class="modal fade" id="confirmarExclusao" 
-				data-bs-backdrop="static" data-bs-keyboard="false"
-				tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title"><s:text name="label.modal.titulo"/></h5>
-			        
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      
-			      <div class="modal-body">
-			      	<span><s:text name="label.modal.corpo"/></span>
-			      </div>
-			      
-			      <div class="modal-footer">
-		        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
-						<s:text name="label.nao"/>
-					</a>
-					
-					<s:url action="excluirCompromissos" var="excluir">
-						<s:param name="compromissoVo.rowid" value="rowid"></s:param>
-					</s:url>
-		        	
-					<s:a href="%{excluir}" id="excluir" class="btn btn-primary" style="width: 75px;">
-						<s:text name="label.sim"/>
-					</s:a>
-					
-			      </div>
-			    </div>		    
-			  </div>
-			</div>
-			
-			<div  class="modal fade" id="inserirDatasRelatorio" 
-				data-bs-backdrop="static" data-bs-keyboard="false"
-				tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title"><s:text name="label.modal.tituloRelatorioCompromissos"/></h5>
-			        
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      
-			      <div class="modal-body d-flex justify-content-around align-items-center">
-			      
-			      		<div class="d-flex justify-content-around align-items-center flex-column col-5">
-			      			<label for="dataInicial" class="col-form-label text-center">
-								<s:text name="label.dataInicial" />
-							</label>
 		
-							<div class="col-sm-10">
-								<input type="date" class="form-control" id="dataInicial" name="dataInicial">					
-							</div>
-			      		</div>
-			      
-	      				<div class="d-flex justify-content-around align-items-center flex-column col-5">
-	      				
-		      				<label for="dataFinal" class="col-form-label text-center">
-								<s:text name="label.dataFinal" />
-							</label>
+		</div>
 		
-							<div class="col-sm-10">
-								<input type="date" class="form-control" id="dataFinal" name="dataFinal">				
-							</div>
-	      				
-	      				</div>
+		<div  class="modal fade" id="confirmarExclusao" 
+			data-bs-backdrop="static" data-bs-keyboard="false"
+			tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title"><s:text name="label.modal.titulo"/></h5>
+		        
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      
+		      <div class="modal-body">
+		      	<span><s:text name="label.modal.corpo"/></span>
+		      </div>
+		      
+		      <div class="modal-footer">
+	        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+					<s:text name="label.nao"/>
+				</a>
+				
+				<s:url action="excluirCompromissos" var="excluir">
+					<s:param name="compromissoVo.rowid" value="rowid"></s:param>
+				</s:url>
+	        	
+				<s:a href="%{excluir}" id="excluir" class="btn btn-primary" style="width: 75px;">
+					<s:text name="label.sim"/>
+				</s:a>
+				
+		      </div>
+		    </div>		    
+		  </div>
+		</div>
+		
+		<div  class="modal fade" id="inserirDatasRelatorio" 
+			data-bs-backdrop="static" data-bs-keyboard="false"
+			tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title"><s:text name="label.modal.tituloRelatorioCompromissos"/></h5>
+		        
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      
+		      <div class="modal-body d-flex justify-content-around align-items-center">
+		      
+		      		<div class="d-flex justify-content-around align-items-center flex-column col-5">
+		      			<label for="dataInicial" class="col-form-label text-center">
+							<s:text name="label.dataInicial" />
+						</label>
 	
-			      </div>
-			      
-			      <div class="modal-footer">
-		        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
-						<s:text name="label.cancelar"/>
-					</a>
-		        	
-					<a href="#" id="novoRelatorio" class="btn btn-primary" style="width: 125px;">
-						<s:text name="label.continuar"/>
-					</a>
-					
-			      </div>
-			    </div>		    
-			  </div>
-			</div>
-		
+						<div class="col-sm-10">
+							<input type="date" class="form-control" id="dataInicial" name="dataInicial">					
+						</div>
+		      		</div>
+		      
+      				<div class="d-flex justify-content-around align-items-center flex-column col-5">
+      				
+	      				<label for="dataFinal" class="col-form-label text-center">
+							<s:text name="label.dataFinal" />
+						</label>
+	
+						<div class="col-sm-10">
+							<input type="date" class="form-control" id="dataFinal" name="dataFinal">				
+						</div>
+      				
+      				</div>
+
+		      </div>
+		      
+		      <div class="modal-footer">
+	        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+					<s:text name="label.cancelar"/>
+				</a>
+	        	
+				<a href="#" id="novoRelatorio" class="btn btn-primary" style="width: 125px;">
+					<s:text name="label.continuar"/>
+				</a>
+				
+		      </div>
+		    </div>		    
+		  </div>
 		</div>
 		
 		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
@@ -269,9 +276,10 @@
 			document.addEventListener('DOMContentLoaded', function () {
 			    const opcoesCombo = document.getElementById('opcoesCombo');
 			    const inputPesquisa = document.getElementById('inputPesquisa');
-				
-			    function toggleInput() {
-			      	if (opcoesCombo.value === '6') {
+			    
+			    opcoesCombo.addEventListener('change', function() {
+					
+			    	if (opcoesCombo.value === '6') {
 			      		inputPesquisa.setAttribute("type", "date");
 			      	} else if (opcoesCombo.value === '7') {
 			      		inputPesquisa.setAttribute("type", "time");
@@ -279,11 +287,8 @@
 			      		inputPesquisa.setAttribute("type", "text");
 			      	}
 			      	inputPesquisa.value = "";
-			    }
-			    
-			    toggleInput();
-			    
-			    opcoesCombo.addEventListener('change', toggleInput);
+			    	
+			    });
 			});
 			
 		</script>

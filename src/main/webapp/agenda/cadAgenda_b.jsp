@@ -11,7 +11,11 @@
 	</head>
 	<body>
 		
-		<div class="d-flex justify-content-start aling-items-start w-100">
+		<div class="background-container justify-content-end align-items-center">
+		    <img src="/avaliacao/imagens/LogoBackground.png" class="background-image" style="height: 120%"/>
+		</div>
+		
+		<div class="d-flex justify-content-start aling-items-start w-100" style="position: relative; z-index: 1;">
 		
 			<nav class="sidebar">
 			
@@ -62,10 +66,10 @@
 							</div>
 						
 							<div class="input-group">
-								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name=""/>
+								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca"/>
 								<s:select 
 									id="selectAlternativo" 
-									name="" 
+									name=""
 									cssClass="form-select inputPesquisar"
 									list="opcoesPeriodo"
 							        headerKey=""  
@@ -73,7 +77,7 @@
 							        listKey="%{codigo}" 
 							        listValue="%{descricao}"
 							        value="filtrar.valorBusca"
-							        style="border-radius: 40px 0px 0px 40px !important;"
+							        style="border-radius: 40px 0px 0px 40px !important; display: none;"
 								/>
 								<button class="btnPesquisar" type="submit">
 									<img src="/avaliacao/imagens/PesquisarIcon.png" />
@@ -106,20 +110,22 @@
 										<td class="colunaId">${rowid}</td>
 										<td>${nome}</td>
 										<td>${periodoDisponivel.descricao}</td>
-										<td class="d-flex justify-content-end align-items-center gap-2">
-										
-											<s:url action="editarAgendas" var="editar">
-												<s:param name="agendaVo.rowid" value="rowid"></s:param>
-											</s:url>
-		
-											<a href="${editar}" class="btnAcao">
-												<img class="imgAcao" src="/avaliacao/imagens/EditarIcon.png" />
-											</a>
-		
-											<a href="#" class="btnAcao" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
-												<img class="imgAcao" src="/avaliacao/imagens/DeletarIcon.png" />
-											</a>
+										<td>
+											<div class="d-flex justify-content-end align-items-center gap-2">
 											
+												<s:url action="editarAgendas" var="editar">
+													<s:param name="agendaVo.rowid" value="rowid"></s:param>
+												</s:url>
+			
+												<a href="${editar}" class="btnAcao">
+													<img class="imgAcao" src="/avaliacao/imagens/EditarIcon.png" />
+												</a>
+			
+												<a href="#" class="btnAcao" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
+													<img class="imgAcao" src="/avaliacao/imagens/DeletarIcon.png" />
+												</a>
+												
+											</div>
 										</td>
 									</tr>
 								</s:iterator>
@@ -139,38 +145,39 @@
 
 			</div>
 			
-			<div  class="modal fade" id="confirmarExclusao" 
-				data-bs-backdrop="static" data-bs-keyboard="false"
-				tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title"><s:text name="label.modal.titulo"/></h5>
-			        
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      
-			      <div class="modal-body">
-			      	<span><s:text name="label.modal.corpo"/></span>
-			      </div>
-			      
-			      <div class="modal-footer">
-		        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
-						<s:text name="label.nao"/>
-					</a>
-					
-					<s:url action="excluirAgendas" var="excluir">
-						<s:param name="agendaVo.rowid" value="rowid"></s:param>
-					</s:url>
-		        	
-					<s:a href="%{excluir}" id="excluir" class="btn btn-primary" style="width: 75px;">
-						<s:text name="label.sim"/>
-					</s:a>
-					
-			      </div>
-			    </div>		    
-			  </div>
-			</div>
+		</div>
+		
+		<div  class="modal fade" id="confirmarExclusao" 
+			data-bs-backdrop="static" data-bs-keyboard="false"
+			tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title"><s:text name="label.modal.titulo"/></h5>
+		        
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      
+		      <div class="modal-body">
+		      	<span><s:text name="label.modal.corpo"/></span>
+		      </div>
+		      
+		      <div class="modal-footer">
+	        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+					<s:text name="label.nao"/>
+				</a>
+				
+				<s:url action="excluirAgendas" var="excluir">
+					<s:param name="agendaVo.rowid" value="rowid"></s:param>
+				</s:url>
+	        	
+				<s:a href="%{excluir}" id="excluir" class="btn btn-primary" style="width: 75px;">
+					<s:text name="label.sim"/>
+				</s:a>
+				
+		      </div>
+		    </div>		    
+		  </div>
 		</div>
 		
 		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
@@ -193,9 +200,10 @@
 			    const opcoesCombo = document.getElementById('opcoesCombo');
 			    const inputPesquisa = document.getElementById('inputPesquisa');
 			    const selectAlternativo = document.getElementById('selectAlternativo');
-				
-			    function toggleInput() {
-			      	if (opcoesCombo.value === '3') {
+			    
+			    opcoesCombo.addEventListener('change', function() {
+					
+					if (opcoesCombo.value === '3') {
 						
 			      		inputPesquisa.removeAttribute("name");
 			        	inputPesquisa.style.display = 'none';
@@ -210,12 +218,9 @@
 			       	 	selectAlternativo.removeAttribute("name");
 			       	 	
 			      	}
-			      	inputPesquisa.value = "";
-			    }
+					inputPesquisa.value = "";
 			    
-			    toggleInput();
-			    
-			    opcoesCombo.addEventListener('change', toggleInput);
+			    });
 			});
 			
 		</script>

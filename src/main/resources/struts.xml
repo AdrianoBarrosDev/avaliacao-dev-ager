@@ -12,6 +12,17 @@
 	<constant name="struts.action.excludePattern" value="/webjars/.*,/h2-console/*" />
 	
     <package name="br.com.soc.sistema" extends="struts-default" strict-method-invocation="false">
+    	
+		<global-results>
+		    <result name="erroBusiness">/erros/erroBusiness.jsp</result>
+		    <result name="erroIllegal">/erros/erroIllegal.jsp</result>
+		</global-results>
+    	
+    	<global-exception-mappings>
+		    <exception-mapping exception="br.com.soc.sistema.exception.BusinessException" result="erroBusiness" />
+		    <exception-mapping exception="java.lang.IllegalArgumentException" result="erroIllegal"/>
+		</global-exception-mappings>
+		    
         <action name="*Funcionarios" class="br.com.soc.sistema.action.FuncionarioAction" method="{1}">
         	<result name="success">/funcionario/cadFuncionario_b.jsp</result>
             <result name="input">/funcionario/cadFuncionario_i.jsp</result>
@@ -34,6 +45,7 @@
         	<result name="success">/relatorioCompromisso/cadRelatorioCompromisso_b.jsp</result>
         	<result name="redirect" type="redirectAction">todosCompromissos</result>
         </action>
+        
     </package>
 
 </struts>

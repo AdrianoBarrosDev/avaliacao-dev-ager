@@ -27,8 +27,8 @@ public class AgendaBusiness {
 		
 		try {
 			
-			if(agendaVo.getNome().isEmpty())
-				throw new IllegalArgumentException("Nome nao pode ser em branco");
+			if(agendaVo.getNome().isEmpty() || agendaVo.getPeriodoDisponivel() == null)
+				throw new IllegalArgumentException("Nome ou periodo disponivel nao podem ser em branco");
 			
 			if(agendaVo.getRowid().isEmpty()) {
 				dao.insertAgenda(agendaVo);

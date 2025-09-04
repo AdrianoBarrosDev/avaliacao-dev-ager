@@ -12,7 +12,11 @@
 	</head>
 	<body>
 	
-		<div class="d-flex justify-content-start aling-items-start w-100">
+		<div class="background-container justify-content-end align-items-center">
+		    <img src="/avaliacao/imagens/LogoBackground.png" class="background-image" style="height: 120%"/>
+		</div>
+		
+		<div class="d-flex justify-content-start aling-items-start w-100" style="position: relative; z-index: 1;">
 		
 			<nav class="sidebar">
 			
