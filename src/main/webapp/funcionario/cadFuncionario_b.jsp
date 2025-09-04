@@ -39,39 +39,37 @@
 				<h1 class="mt-4">Funcionários</h1>
 			
 				<div class="row mb-4">
-					<div>
-						<s:form action="/filtrarFuncionarios.action">
+					<s:form action="/filtrarFuncionarios.action">
+						
+						<div class="d-flex justify-content-start align-items-center gap-5" style="height: 40px">
+						
+							<div class="input-group" style="width: auto">
+							    <span class="input-group-text">
+							        <strong><s:text name="label.buscar.por"/></strong>
+							    </span>
 							
-							<div class="d-flex justify-content-start align-items-center gap-5" style="height: 40px">
-							
-								<div class="input-group" style="width: auto">
-								    <span class="input-group-text">
-								        <strong><s:text name="label.buscar.por"/></strong>
-								    </span>
-								
-								    <s:select  
-								        cssClass="form-select opcoesFiltrar" 
-								        name="filtrar.opcoesCombo" 
-								        list="listaOpcoesCombo"  
-								        headerKey=""  
-								        headerValue="Escolha..." 
-								        listKey="%{codigo}" 
-								        listValue="%{descricao}"
-								        value="filtrar.opcoesCombo.codigo"								
-								    />
-								</div>
-							
-								<div class="input-group">
-									<s:textfield cssClass="form-control inputPesquisar" id="nome" name="filtrar.valorBusca"/>
-									<button class="btnPesquisar" type="submit">
-										<img src="/avaliacao/imagens/PesquisarIcon.png" />
-									</button>
-								</div>
-								
+							    <s:select  
+							        cssClass="form-select opcoesFiltrar" 
+							        name="filtrar.opcoesCombo" 
+							        list="listaOpcoesCombo"  
+							        headerKey=""  
+							        headerValue="Escolha..." 
+							        listKey="%{codigo}" 
+							        listValue="%{descricao}"
+							        value="filtrar.opcoesCombo.codigo"								
+							    />
+							</div>
+						
+							<div class="input-group">
+								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca"/>
+								<button class="btnPesquisar" type="submit">
+									<img src="/avaliacao/imagens/PesquisarIcon.png" />
+								</button>
 							</div>
 							
-						</s:form>			
-					</div>				
+						</div>
+						
+					</s:form>		
 				</div>
 	
 				<div class="tabela-wrapper mb-5">

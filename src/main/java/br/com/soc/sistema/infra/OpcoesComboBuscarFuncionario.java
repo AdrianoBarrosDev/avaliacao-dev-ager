@@ -7,37 +7,37 @@ import java.util.Optional;
 
 import br.com.soc.sistema.exception.BusinessException;
 
-public enum OpcoesComboBuscar {
+public enum OpcoesComboBuscarFuncionario {
 	ID("1", "ID"), 
 	NOME("2", "NOME");
 	
 	private String codigo;
 	private String descricao;
-	private final static Map<String, OpcoesComboBuscar> opcoes = new HashMap<>();
+	private final static Map<String, OpcoesComboBuscarFuncionario> opcoes = new HashMap<>();
 	
 	static {
-		Arrays.asList(OpcoesComboBuscar.values())
+		Arrays.asList(OpcoesComboBuscarFuncionario.values())
 		.forEach(
 			opcao -> opcoes.put(opcao.getCodigo(), opcao)
 		);
 	}
 	
-	private OpcoesComboBuscar(String codigo, String descricao) {
+	private OpcoesComboBuscarFuncionario(String codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
 	
-	public static OpcoesComboBuscar buscarPor(String codigo) throws IllegalArgumentException {
+	public static OpcoesComboBuscarFuncionario buscarPor(String codigo) throws IllegalArgumentException {
 		if(codigo == null)
 			throw new IllegalArgumentException("informe um codigo valido");
 		
-		OpcoesComboBuscar opcao = getOpcao(codigo)
+		OpcoesComboBuscarFuncionario opcao = getOpcao(codigo)
 				.orElseThrow(() -> new BusinessException("Codigo informado nao existe"));
 		
 		return opcao;
 	}
 	
-	private static Optional<OpcoesComboBuscar> getOpcao(String codigo){
+	private static Optional<OpcoesComboBuscarFuncionario> getOpcao(String codigo){
 		return Optional.ofNullable(opcoes.get(codigo));
 	}
 	

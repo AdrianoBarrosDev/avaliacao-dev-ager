@@ -38,12 +38,51 @@
 			
 				<h1 class="mt-4">Agendas</h1>
 				
-				<div class="row mt-5 mb-2">
-					<div class="col-sm p-0">
-					
-						<!-- Futuros Filtros de Agenda -->
-					  	
-					</div>				
+				<div class="row mb-4">
+					<s:form action="/filtrarAgendas.action">
+						
+						<div class="d-flex justify-content-start align-items-center gap-5" style="height: 40px">
+						
+							<div class="input-group" style="width: auto">
+							    <span class="input-group-text">
+							        <strong><s:text name="label.buscar.por"/></strong>
+							    </span>
+							
+							    <s:select  
+							    	id="opcoesCombo"
+							        cssClass="form-select opcoesFiltrar" 
+							        name="filtrar.opcoesCombo" 
+							        list="listaOpcoesCombo"
+							        headerKey=""  
+							        headerValue="Escolha..." 
+							        listKey="%{codigo}" 
+							        listValue="%{descricao}"
+							        value="filtrar.opcoesCombo.codigo"								
+							    />
+							</div>
+						
+							<div class="input-group">
+								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name=""/>
+								<s:select 
+									id="selectAlternativo" 
+									name="" 
+									cssClass="form-select inputPesquisar"
+									list="opcoesPeriodo"
+							        headerKey=""  
+							        headerValue="Escolha..." 
+							        listKey="%{codigo}" 
+							        listValue="%{descricao}"
+							        value="filtrar.valorBusca"
+							        style="border-radius: 40px 0px 0px 40px !important;"
+								/>
+								<button class="btnPesquisar" type="submit">
+									<img src="/avaliacao/imagens/PesquisarIcon.png" />
+								</button>
+							</div>
+							
+						</div>
+						
+					</s:form>		
 				</div>
 				
 				<div class="tabela-wrapper mb-5">
@@ -147,5 +186,38 @@
 			});
 		
 		</script>
+		
+		<script>
+		
+			document.addEventListener('DOMContentLoaded', function () {
+			    const opcoesCombo = document.getElementById('opcoesCombo');
+			    const inputPesquisa = document.getElementById('inputPesquisa');
+			    const selectAlternativo = document.getElementById('selectAlternativo');
+				
+			    function toggleInput() {
+			      	if (opcoesCombo.value === '3') {
+						
+			      		inputPesquisa.removeAttribute("name");
+			        	inputPesquisa.style.display = 'none';
+			        	selectAlternativo.style.display = 'inline-block';
+			        	selectAlternativo.setAttribute("name", "filtrar.valorBusca");
+			        	
+			      	} else {
+
+						inputPesquisa.setAttribute("name", "filtrar.valorBusca");
+			        	inputPesquisa.style.display = 'inline-block';
+			       	 	selectAlternativo.style.display = 'none';
+			       	 	selectAlternativo.removeAttribute("name");
+			       	 	
+			      	}
+			    }
+			    
+			    toggleInput();
+			    
+			    opcoesCombo.addEventListener('change', toggleInput);
+			});
+			
+		</script>
+		
 	</body>
 </html>

@@ -1,10 +1,12 @@
 package br.com.soc.sistema.business;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.soc.sistema.dao.AgendaDao;
 import br.com.soc.sistema.exception.BusinessException;
+import br.com.soc.sistema.filter.AgendaFilter;
 import br.com.soc.sistema.infra.OpcoesPeriodoDisponivel;
 import br.com.soc.sistema.vo.AgendaVo;
 
@@ -68,6 +70,47 @@ public class AgendaBusiness {
 			throw new BusinessException("Nao foi possivel utilizar o horario");
 		}
 		return false;
+	}
+	
+	public List<AgendaVo> filtrarAgendas(AgendaFilter filter) {
+		
+		List<AgendaVo> agendas = new ArrayList<>();
+		
+		switch(filter.getOpcoesCombo()) {
+			case ID:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return agendas;
+				}
+				
+				try {
+					Long cod = Long.parseLong(filter.getValorBusca());
+					agendas.add(dao.findByCodigo(cod));
+				} catch (NumberFormatException e) {
+					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
+				}
+				
+			break;
+			
+			case NOME:
+				agendas.addAll(dao.findAllByNome(filter.getValorBusca()));
+			break;
+			
+			case PERIODO:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return dao.findAllAgendas();
+				}
+				
+				agendas.addAll(dao.findByPeriodo(filter.getValorBusca()));
+				
+			break;
+		
+		
+		}
+		
+		return agendas;
+		
 	}
 	
 	public AgendaVo buscarAgendaPor(String codigo) {

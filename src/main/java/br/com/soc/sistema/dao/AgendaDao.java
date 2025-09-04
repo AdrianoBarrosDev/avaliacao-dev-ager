@@ -63,6 +63,69 @@ public class AgendaDao extends Dao {
 		}
 	}
 	
+	public List<AgendaVo> findByPeriodo(String codPeriodo) {
+		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodoDisponivel FROM agenda ")
+								.append("WHERE periodoDisponivel = ?");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setString(i, codPeriodo);
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				AgendaVo vo = null;
+				List<AgendaVo> agendas = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new AgendaVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setNome(rs.getString("nome"));
+					vo.setPeriodoDisponivel(rs.getString("periodoDisponivel"));
+					agendas.add(vo);
+				}
+				return agendas;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
+	}
+	
+	public List<AgendaVo> findAllByNome(String nome) {
+		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodoDisponivel FROM agenda ")
+								.append("WHERE lower(nm_agenda) LIKE lower(?)");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setString(i, "%"+nome+"%");
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				AgendaVo vo = null;
+				List<AgendaVo> agendas = new ArrayList<>();
+
+				while(rs.next()) {
+					vo = new AgendaVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setNome(rs.getString("nome"));
+					vo.setPeriodoDisponivel(rs.getString("periodoDisponivel"));
+					agendas.add(vo);
+				}
+				return agendas;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
+	}
+	
 	public List<AgendaVo> findAllAgendas() {
 		StringBuilder query = new StringBuilder("SELECT rowid id, nm_agenda nome, periodoDisponivel FROM agenda");
 		try(
