@@ -106,7 +106,6 @@ public class AgendaBusiness {
 				
 			break;
 		
-		
 		}
 		
 		return agendas;

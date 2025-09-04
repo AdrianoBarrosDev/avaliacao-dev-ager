@@ -39,12 +39,39 @@
 			
 				<h1 class="mt-4">Compromissos</h1>
 				
-				<div class="row mt-4 mb-2">
-					<div class="col-sm p-0">
-					
-						<!-- Futuros Filtros de Compromisso -->
-					  	
-					</div>				
+				<div class="row mb-4">
+					<s:form action="/filtrarCompromissos.action">
+						
+						<div class="d-flex justify-content-start align-items-center gap-5" style="height: 40px">
+						
+							<div class="input-group" style="width: auto">
+							    <span class="input-group-text">
+							        <strong><s:text name="label.buscar.por"/></strong>
+							    </span>
+							
+							    <s:select  
+							    	id="opcoesCombo"
+							        cssClass="form-select opcoesFiltrar" 
+							        name="filtrar.opcoesCombo" 
+							        list="listaOpcoesCombo"
+							        headerKey=""  
+							        headerValue="Escolha..." 
+							        listKey="%{codigo}" 
+							        listValue="%{descricao}"
+							        value="filtrar.opcoesCombo.codigo"								
+							    />
+							</div>
+						
+							<div class="input-group">
+								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca"/>
+								<button class="btnPesquisar" type="submit">
+									<img src="/avaliacao/imagens/PesquisarIcon.png" />
+								</button>
+							</div>
+							
+						</div>
+						
+					</s:form>		
 				</div>
 				
 				<div class="tabela-wrapper mb-5">
@@ -235,6 +262,30 @@
 				
 			});
 		
+		</script>
+		
+		<script>
+		
+			document.addEventListener('DOMContentLoaded', function () {
+			    const opcoesCombo = document.getElementById('opcoesCombo');
+			    const inputPesquisa = document.getElementById('inputPesquisa');
+				
+			    function toggleInput() {
+			      	if (opcoesCombo.value === '6') {
+			      		inputPesquisa.setAttribute("type", "date");
+			      	} else if (opcoesCombo.value === '7') {
+			      		inputPesquisa.setAttribute("type", "time");
+			      	} else {
+			      		inputPesquisa.setAttribute("type", "text");
+			      	}
+			      	inputPesquisa.value = "";
+			    }
+			    
+			    toggleInput();
+			    
+			    opcoesCombo.addEventListener('change', toggleInput);
+			});
+			
 		</script>
 		
 	</body>

@@ -210,6 +210,7 @@
 			       	 	selectAlternativo.removeAttribute("name");
 			       	 	
 			      	}
+			      	inputPesquisa.value = "";
 			    }
 			    
 			    toggleInput();

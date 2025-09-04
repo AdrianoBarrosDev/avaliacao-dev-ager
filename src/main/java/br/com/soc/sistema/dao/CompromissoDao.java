@@ -9,6 +9,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.soc.sistema.vo.CompromissoVo;
@@ -134,6 +135,84 @@ public class CompromissoDao extends Dao {
 		return null;
 	}
 	
+	public List<CompromissoVo> findAllByNomeFuncionario(String nome) {
+		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
+								.append("JOIN funcionario AS F ON C.codigoFuncionario = F.rowid ")
+								.append("JOIN agenda AS A ON C.codigoAgenda = A.rowid ")
+								.append("WHERE lower(F.nm_funcionario) LIKE lower(?)");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setString(i, "%"+nome+"%");
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				CompromissoVo vo = null;
+				List<CompromissoVo> compromissos = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new CompromissoVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setCodigoFuncionario(rs.getString("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nm_funcionario"));
+					vo.setCodigoAgenda(rs.getString("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nm_agenda"));
+					vo.setData(rs.getDate("data").toString());
+					vo.setHorario(rs.getTime("horario").toString());
+					compromissos.add(vo);
+				}
+				
+				return compromissos;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
+	}
+	
+	public List<CompromissoVo> findAllByNomeAgenda(String nome) {
+		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
+								.append("JOIN funcionario AS F ON C.codigoFuncionario = F.rowid ")
+								.append("JOIN agenda AS A ON C.codigoAgenda = A.rowid ")
+								.append("WHERE lower(A.nm_agenda) LIKE lower(?)");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setString(i, "%"+nome+"%");
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				CompromissoVo vo = null;
+				List<CompromissoVo> compromissos = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new CompromissoVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setCodigoFuncionario(rs.getString("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nm_funcionario"));
+					vo.setCodigoAgenda(rs.getString("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nm_agenda"));
+					vo.setData(rs.getDate("data").toString());
+					vo.setHorario(rs.getTime("horario").toString());
+					compromissos.add(vo);
+				}
+				
+				return compromissos;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
+	}
+	
 	public CompromissoVo findByCodigo(Long codigo) {
 		StringBuilder query = new StringBuilder("SELECT rowid id, codigoFuncionario, codigoAgenda, data, horario FROM compromisso ")
 								.append("WHERE rowid = ?");
@@ -161,6 +240,162 @@ public class CompromissoDao extends Dao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public List<CompromissoVo> findAllByCodigoFuncionario(Long codFuncionario) {
+		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
+								.append("JOIN funcionario AS F ON C.codigoFuncionario = F.rowid ")
+								.append("JOIN agenda AS A ON C.codigoAgenda = A.rowid ")
+								.append("WHERE C.codigoFuncionario = ?");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setLong(i, codFuncionario);
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				CompromissoVo vo = null;
+				List<CompromissoVo> compromissos = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new CompromissoVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setCodigoFuncionario(rs.getString("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nm_funcionario"));
+					vo.setCodigoAgenda(rs.getString("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nm_agenda"));
+					vo.setData(rs.getDate("data").toString());
+					vo.setHorario(rs.getTime("horario").toString());
+					compromissos.add(vo);
+				}
+				
+				return compromissos;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
+	}
+	
+	public List<CompromissoVo> findAllByCodigoAgenda(Long codAgenda) {
+		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
+								.append("JOIN funcionario AS F ON C.codigoFuncionario = F.rowid ")
+								.append("JOIN agenda AS A ON C.codigoAgenda = A.rowid ")
+								.append("WHERE C.codigoAgenda = ?");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setLong(i, codAgenda);
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				CompromissoVo vo = null;
+				List<CompromissoVo> compromissos = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new CompromissoVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setCodigoFuncionario(rs.getString("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nm_funcionario"));
+					vo.setCodigoAgenda(rs.getString("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nm_agenda"));
+					vo.setData(rs.getDate("data").toString());
+					vo.setHorario(rs.getTime("horario").toString());
+					compromissos.add(vo);
+				}
+				
+				return compromissos;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
+	}
+	
+	public List<CompromissoVo> findAllByData(String data) {
+		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
+								.append("JOIN funcionario AS F ON C.codigoFuncionario = F.rowid ")
+								.append("JOIN agenda AS A ON C.codigoAgenda = A.rowid ")
+								.append("WHERE C.data = ?");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setDate(i, Date.valueOf(data));
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				CompromissoVo vo = null;
+				List<CompromissoVo> compromissos = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new CompromissoVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setCodigoFuncionario(rs.getString("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nm_funcionario"));
+					vo.setCodigoAgenda(rs.getString("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nm_agenda"));
+					vo.setData(rs.getDate("data").toString());
+					vo.setHorario(rs.getTime("horario").toString());
+					compromissos.add(vo);
+				}
+				
+				return compromissos;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
+	}
+	
+	public List<CompromissoVo> findAllByHorario(String horario) {
+		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
+								.append("JOIN funcionario AS F ON C.codigoFuncionario = F.rowid ")
+								.append("JOIN agenda AS A ON C.codigoAgenda = A.rowid ")
+								.append("WHERE C.horario = ?");
+		try (
+			Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			
+			int i=1;
+			ps.setTime(i, Time.valueOf(horario));
+			
+			try(ResultSet rs = ps.executeQuery()) {
+				CompromissoVo vo = null;
+				List<CompromissoVo> compromissos = new ArrayList<>();
+				
+				while(rs.next()) {
+					vo = new CompromissoVo();
+					vo.setRowid(rs.getString("id"));
+					vo.setCodigoFuncionario(rs.getString("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nm_funcionario"));
+					vo.setCodigoAgenda(rs.getString("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nm_agenda"));
+					vo.setData(rs.getDate("data").toString());
+					vo.setHorario(rs.getTime("horario").toString());
+					compromissos.add(vo);
+				}
+				
+				return compromissos;
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
+		
 	}
 	
 }

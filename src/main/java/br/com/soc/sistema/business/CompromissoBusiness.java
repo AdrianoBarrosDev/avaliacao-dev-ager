@@ -1,10 +1,12 @@
 package br.com.soc.sistema.business;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.soc.sistema.dao.CompromissoDao;
 import br.com.soc.sistema.exception.BusinessException;
+import br.com.soc.sistema.filter.CompromissoFilter;
 import br.com.soc.sistema.vo.CompromissoVo;
 
 public class CompromissoBusiness {
@@ -72,6 +74,94 @@ public class CompromissoBusiness {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+	
+	public List<CompromissoVo> filtrarCompromissos(CompromissoFilter filter) {
+		
+		List<CompromissoVo> compromissos = new ArrayList<>();
+		
+		switch(filter.getOpcoesCombo()) {
+			case ID:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return compromissos;
+				}
+				
+				try {
+					Long cod = Long.parseLong(filter.getValorBusca());
+					compromissos.add(dao.findByCodigo(cod));
+				} catch (NumberFormatException e) {
+					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
+				}
+				
+			break;
+			
+			case CODFUNCIONARIO:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return compromissos;
+				}
+				
+				try {
+					Long cod = Long.parseLong(filter.getValorBusca());
+					compromissos.addAll(dao.findAllByCodigoFuncionario(cod));
+				} catch (NumberFormatException e) {
+					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
+				}
+				
+			break;
+			
+			case NOMEFUNCIONARIO:
+				compromissos.addAll(dao.findAllByNomeFuncionario(filter.getValorBusca()));
+			break;
+			
+			case CODAGENDA:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return compromissos;
+				}
+				
+				try {
+					Long cod = Long.parseLong(filter.getValorBusca());
+					compromissos.addAll(dao.findAllByCodigoAgenda(cod));
+				} catch (NumberFormatException e) {
+					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
+				}
+
+			break;
+			
+			case NOMEAGENDA:
+				compromissos.addAll(dao.findAllByNomeAgenda(filter.getValorBusca()));
+			break;
+			
+			case DATA:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return compromissos;
+				}
+				
+				compromissos.addAll(dao.findAllByData(filter.getValorBusca()));
+				
+			break;
+			
+			case HORARIO:
+				
+				if(filter.getValorBusca().isEmpty()) {
+					return compromissos;
+				}
+				
+				if(filter.getValorBusca().length() == 5) {
+					filter.setValorBusca(filter.getValorBusca() + ":00");
+				}
+				
+				compromissos.addAll(dao.findAllByHorario(filter.getValorBusca()));
+				
+			break;
+		
+		}
+		
+		return compromissos;
+		
 	}
 	
 }

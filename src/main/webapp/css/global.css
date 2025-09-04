@@ -111,7 +111,7 @@ h1 {
 }
 
 .opcoesFiltrar {
-	width: 200px;
+	width: 11vw !important;
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);

@@ -48,7 +48,8 @@
 							        <strong><s:text name="label.buscar.por"/></strong>
 							    </span>
 							
-							    <s:select  
+							    <s:select 
+							    	id="opcoesCombo"
 							        cssClass="form-select opcoesFiltrar" 
 							        name="filtrar.opcoesCombo" 
 							        list="listaOpcoesCombo"  
@@ -171,5 +172,19 @@
 			});
 		
 		</script>
+		
+		<script>
+		
+			document.addEventListener('DOMContentLoaded', function () {
+			    const opcoesCombo = document.getElementById('opcoesCombo');
+			    const inputPesquisa = document.getElementById('inputPesquisa');
+			    
+			    opcoesCombo.addEventListener('change', function () {
+			    	inputPesquisa.value = "";
+				});
+			});
+			
+		</script>
+		
 	</body>
 </html>

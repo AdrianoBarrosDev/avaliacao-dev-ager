@@ -63,24 +63,16 @@ public class AgendaAction extends Action {
 		return REDIRECT;
 	}
 	
+	public List<OpcoesComboBuscarAgenda> getListaOpcoesCombo(){
+		return Arrays.asList(OpcoesComboBuscarAgenda.values());
+	}
+	
 	public List<AgendaVo> getAgendas() {
 		return agendas;
 	}
 	
 	public void setAgendas(List<AgendaVo> agendas) {
 		this.agendas = agendas;
-	}
-	
-	public AgendaBusiness getBusiness() {
-		return business;
-	}
-	
-	public List<OpcoesComboBuscarAgenda> getListaOpcoesCombo(){
-		return Arrays.asList(OpcoesComboBuscarAgenda.values());
-	}
-	
-	public void setBusiness(AgendaBusiness business) {
-		this.business = business;
 	}
 	
 	public AgendaVo getAgendaVo() {
