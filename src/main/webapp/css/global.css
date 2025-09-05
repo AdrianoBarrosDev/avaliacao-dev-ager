@@ -111,7 +111,9 @@ h1 {
 }
 
 .opcoesFiltrar {
-	width: 11vw !important;
+	max-width: 210px !important;
+	width: 210px !important;
+	height: 40px;
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
@@ -120,10 +122,12 @@ h1 {
 .input-group {
 	max-width: 575px;
 	height: 100%;
+	min-height: 40px;
 }
 
 .input-group-text {
 	width: 140px;
+	height: 40px;
 	background-color: #46A6AF;
 	color: white;
 	border: none;

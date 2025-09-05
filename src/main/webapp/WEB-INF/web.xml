@@ -32,7 +32,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 
 	<servlet-mapping>
 		<servlet-name>soap</servlet-name>
-		<url-pattern>/soap</url-pattern>
+		<url-pattern>/soap/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

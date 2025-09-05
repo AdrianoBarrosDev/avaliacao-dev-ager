@@ -3,5 +3,10 @@
         version='2.0'>
      <endpoint name="WebServiceFuncionariosImpl" 
         implementation="br.com.soc.sistema.soap.WebServiceFuncionariosImpl" 
-        url-pattern="/soap" ></endpoint>
+        url-pattern="/soap/funcionarios" ></endpoint>
+     
+     <endpoint name="WebServiceAgendasImpl" 
+        implementation="br.com.soc.sistema.soap.WebServiceAgendasImpl" 
+        url-pattern="/soap/agendas" ></endpoint>
+     
 </endpoints>
