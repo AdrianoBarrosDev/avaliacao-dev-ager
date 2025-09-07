@@ -22,22 +22,11 @@ public class FuncionarioBusiness {
 	}	
 	
 	public void salvarFuncionario(FuncionarioVo funcionarioVo) {
-		try {
-			
-			if(funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
-				editarFuncionario(funcionarioVo);
-			} else {
-				criarFuncionario(funcionarioVo);
-			}
-			
-		} catch (IllegalArgumentException e) {
-	        throw e;
-	    } catch (BusinessException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
+		if(funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
+			editarFuncionario(funcionarioVo);
+		} else {
+			criarFuncionario(funcionarioVo);
 		}
-		
 	}
 	
 	public void criarFuncionario(FuncionarioVo funcionarioVo) {
@@ -47,7 +36,7 @@ public class FuncionarioBusiness {
 	    
 		    dao.insertFuncionario(funcionarioVo);
 	        
-	    } catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException | BusinessException e) {
 	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao inserir funcionário");
@@ -68,7 +57,7 @@ public class FuncionarioBusiness {
 	    
 	        dao.updateFuncionario(funcionarioVo);
 	        
-	    } catch (IllegalArgumentException e) {
+	    } catch (IllegalArgumentException | BusinessException e) {
 	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao atualizar funcionário");

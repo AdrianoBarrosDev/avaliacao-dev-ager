@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.soc.sistema.dao.CompromissoDao;
 import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.filter.CompromissoFilter;
+import br.com.soc.sistema.vo.AgendaVo;
 import br.com.soc.sistema.vo.CompromissoVo;
 
 public class CompromissoBusiness {
@@ -26,30 +27,11 @@ public class CompromissoBusiness {
 	}
 	
 	public void salvarCompromisso(CompromissoVo compromissoVo) {
-		try {
-			
-			FuncionarioBusiness funcionarioBusiness = new FuncionarioBusiness();
-			funcionarioBusiness.buscarFuncionarioPor(compromissoVo.getCodigoFuncionario()); // Lança uma exceção se não encontrar
-			
-			AgendaBusiness agendaBusiness = new AgendaBusiness();
-			if(!agendaBusiness.verificarHorarioPermitidoAgenda(compromissoVo.getCodigoAgenda(), compromissoVo.getHorario())) {
-				throw new BusinessException("Horario invalido para essa agenda");
-			}
-			
-			if(compromissoVo.getRowid() != null && !compromissoVo.getRowid().isEmpty()) {
-				editarCompromisso(compromissoVo);
-			} else {
-				criarCompromisso(compromissoVo);
-			}
-			
-		} catch (IllegalArgumentException e) {
-	        throw e;
-	    } catch (BusinessException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
+		if(compromissoVo.getRowid() != null && !compromissoVo.getRowid().isEmpty()) {
+			editarCompromisso(compromissoVo);
+		} else {
+			criarCompromisso(compromissoVo);
 		}
-		
 	}
 	
 	public void criarCompromisso(CompromissoVo compromissoVo) {
@@ -59,7 +41,7 @@ public class CompromissoBusiness {
 	    
 	    	dao.insertCompromisso(compromissoVo);
 	        
-	    } catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException | BusinessException e) {
 	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao inserir compromisso");
@@ -79,7 +61,7 @@ public class CompromissoBusiness {
 	    	
 	    	dao.updateCompromisso(compromissoVo);
 	    	
-	    } catch (IllegalArgumentException e) {
+	    } catch (IllegalArgumentException | BusinessException e) {
 	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao atualizar compromisso");
@@ -232,6 +214,15 @@ public class CompromissoBusiness {
 		
 		validarDataCompromisso(vo.getData());
 		validarHorarioCompromisso(vo.getHorario());
+		
+		FuncionarioBusiness funcionarioBusiness = new FuncionarioBusiness();
+		funcionarioBusiness.buscarFuncionarioPor(vo.getCodigoFuncionario()); // Lança uma exceção se não encontrar
+		
+		AgendaBusiness agendaBusiness = new AgendaBusiness();
+		if(!agendaBusiness.verificarHorarioPermitidoAgenda(vo.getCodigoAgenda(), vo.getHorario())) {
+			AgendaVo agendaVo = agendaBusiness.buscarAgendaPor(vo.getCodigoAgenda());
+			throw new BusinessException("Horario invalido para essa agenda. Essa agenda só permite compromissos no perído: " + agendaVo.getPeriodoDisponivel());
+		}
 		
 	}
 	

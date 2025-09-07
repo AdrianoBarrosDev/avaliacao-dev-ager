@@ -25,22 +25,11 @@ public class AgendaBusiness {
 	}
 	
 	public void salvarAgenda(AgendaVo agendaVo) {
-		try {
-			
-			if(agendaVo.getRowid() != null && !agendaVo.getRowid().isEmpty()) {
-				editarAgenda(agendaVo);
-			} else {
-				criarAgenda(agendaVo);
-			}
-			
-		} catch (IllegalArgumentException e) {
-	        throw e;
-	    } catch (BusinessException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
+		if(agendaVo.getRowid() != null && !agendaVo.getRowid().isEmpty()) {
+			editarAgenda(agendaVo);
+		} else {
+			criarAgenda(agendaVo);
 		}
-		
 	}
 	
 	public void criarAgenda(AgendaVo agendaVo) {
@@ -50,7 +39,7 @@ public class AgendaBusiness {
 	    
 	    	dao.insertAgenda(agendaVo);
 	        
-	    } catch (IllegalArgumentException e) {
+	    } catch (IllegalArgumentException | BusinessException e) {
 	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao inserir agenda");
@@ -70,7 +59,7 @@ public class AgendaBusiness {
 	    	
 	    	dao.updateAgenda(agendaVo);
 	    	
-	    } catch (IllegalArgumentException e) {
+	    } catch (IllegalArgumentException | BusinessException e) {
 	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao atualizar agenda");
