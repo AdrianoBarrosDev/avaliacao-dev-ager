@@ -43,7 +43,7 @@ public class CompromissoDao extends Dao {
 			
 			int i=1;
 			ps.setLong(i++, Long.parseLong(compromissoVo.getCodigoFuncionario()));
-			ps.setLong(i++, Long.parseLong(compromissoVo.getCodigoFuncionario()));
+			ps.setLong(i++, Long.parseLong(compromissoVo.getCodigoAgenda()));
 			ps.setDate(i++, Date.valueOf(LocalDate.parse(compromissoVo.getData())));
 			ps.setTime(i++, Time.valueOf(LocalTime.parse(compromissoVo.getHorario())));
 			ps.setLong(i++, Long.parseLong(compromissoVo.getRowid()));
