@@ -54,7 +54,7 @@ public class CompromissoAction extends Action {
 		if(compromissoVo.getRowid() == null)
 			return REDIRECT;
 		
-		business.excluirCompromisso(compromissoVo);
+		business.excluirCompromisso(compromissoVo.getRowid());
 		
 		return REDIRECT;
 	}

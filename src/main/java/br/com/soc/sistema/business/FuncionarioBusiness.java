@@ -34,7 +34,9 @@ public class FuncionarioBusiness {
 			
 		} catch (IllegalArgumentException e) {
 	        throw e;
-	    } catch (Exception e) {
+	    } catch (BusinessException e) {
+			throw e;
+		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
 		
@@ -51,13 +53,28 @@ public class FuncionarioBusiness {
 	    if(buscarFuncionarioPor(funcionarioVo.getRowid()) == null)
     		throw new IllegalArgumentException("Esse ID de funcionario nao existe");
 	    
-	    dao.updateFuncionario(funcionarioVo);
+	    try {
+	        dao.updateFuncionario(funcionarioVo);
+	    } catch (Exception e) {
+	        throw new BusinessException("Erro ao atualizar funcionário");
+	    }
+	    
 	}
 	
-	public void excluirFuncionario(FuncionarioVo funcionarioVo) {
+	public void excluirFuncionario(String codFuncionario) {
 		try {
-			dao.deleteFuncionario(funcionarioVo);
-		} catch (Exception e) {
+			
+			if(codFuncionario == null || codFuncionario.isEmpty())
+				throw new IllegalArgumentException("ID do funcionario obrigatorio para exclusao");
+			
+			if(buscarFuncionarioPor(codFuncionario) == null)
+	    		throw new IllegalArgumentException("Esse ID de funcionario nao existe");
+			
+			dao.deleteFuncionario(codFuncionario);
+			
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
 		}
 	}

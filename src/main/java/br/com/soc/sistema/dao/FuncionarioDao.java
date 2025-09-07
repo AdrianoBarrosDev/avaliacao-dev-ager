@@ -43,14 +43,14 @@ public class FuncionarioDao extends Dao {
 		}
 	}
 	
-	public void deleteFuncionario(FuncionarioVo funcionarioVo) {
+	public void deleteFuncionario(String codFuncionario) {
 		StringBuilder query = new StringBuilder("DELETE FROM funcionario WHERE rowid = ?");
 		try (
 			Connection con = getConexao();
 			PreparedStatement ps = con.prepareStatement(query.toString())) {
 			
 			int i=1;
-			ps.setLong(i, Long.parseLong(funcionarioVo.getRowid()));
+			ps.setLong(i, Long.parseLong(codFuncionario));
 			ps.executeUpdate();
 			
 		} catch (SQLException e) {

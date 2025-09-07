@@ -40,7 +40,9 @@ public class AgendaBusiness {
 			
 		} catch (IllegalArgumentException e) {
 	        throw e;
-	    } catch (Exception e) {
+	    } catch (BusinessException e) {
+			throw e;
+		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
 		
@@ -57,17 +59,30 @@ public class AgendaBusiness {
 	    if(buscarAgendaPor(agendaVo.getRowid()) == null)
     		throw new IllegalArgumentException("Esse ID de agenda nao existe");
 	    
-	    dao.updateAgenda(agendaVo);
+	    try {
+	    	dao.updateAgenda(agendaVo);
+	    } catch (Exception e) {
+	        throw new BusinessException("Erro ao atualizar agenda");
+	    }
+
 	}
 	
-	public void excluirAgenda(AgendaVo agendaVo) {
-		
+	public void excluirAgenda(String codAgenda) {
 		try {
-			dao.deleteAgenda(agendaVo);
-		} catch (Exception e) {
+			
+			if(codAgenda == null || codAgenda.isEmpty())
+				throw new IllegalArgumentException("ID da agenda obrigatorio para exclusao");
+			
+			if(buscarAgendaPor(codAgenda) == null)
+	    		throw new IllegalArgumentException("Esse ID de agenda nao existe");
+			
+			dao.deleteAgenda(codAgenda);
+			
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
 		}
-		
 	}
 	
 	public boolean verificarHorarioPermitidoAgenda(String codigoAgenda, String horarioStr) {

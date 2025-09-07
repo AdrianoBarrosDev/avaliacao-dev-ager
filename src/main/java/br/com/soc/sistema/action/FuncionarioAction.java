@@ -55,7 +55,7 @@ public class FuncionarioAction extends Action {
 			return REDIRECT;
 		}
 		
-		business.excluirFuncionario(funcionarioVo);
+		business.excluirFuncionario(funcionarioVo.getRowid());
 		
 		return REDIRECT;
 	}

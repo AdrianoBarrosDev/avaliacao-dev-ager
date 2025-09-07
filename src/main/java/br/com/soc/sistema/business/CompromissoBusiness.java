@@ -69,13 +69,28 @@ public class CompromissoBusiness {
 	    if(buscarCompromissoPor(compromissoVo.getRowid()) == null)
     		throw new IllegalArgumentException("Esse ID de compromisso nao existe");
 	    
-	    dao.updateCompromisso(compromissoVo);
+	    try {
+	    	dao.updateCompromisso(compromissoVo);
+	    } catch (Exception e) {
+	        throw new BusinessException("Erro ao atualizar compromisso");
+	    }
+	    
 	}
 	
-	public void excluirCompromisso(CompromissoVo compromissoVo) {
+	public void excluirCompromisso(String codCompromisso) {
 		try {
-			dao.deleteCompromisso(compromissoVo);
-		} catch (Exception e) {
+			
+			if(codCompromisso == null || codCompromisso.isEmpty())
+				throw new IllegalArgumentException("ID do compromisso obrigatorio para exclusao");
+			
+			if(buscarCompromissoPor(codCompromisso) == null)
+	    		throw new IllegalArgumentException("Esse ID de compromisso nao existe");
+			
+			dao.deleteCompromisso(codCompromisso);
+			
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a exclusao do registro");
 		}
 	}

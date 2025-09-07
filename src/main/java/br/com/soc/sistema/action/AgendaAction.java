@@ -58,7 +58,7 @@ public class AgendaAction extends Action {
 		if(agendaVo.getRowid() == null)
 			return REDIRECT;
 		
-		business.excluirAgenda(agendaVo);
+		business.excluirAgenda(agendaVo.getRowid());
 		
 		return REDIRECT;
 	}
