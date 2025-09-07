@@ -104,12 +104,7 @@ public class FuncionarioBusiness {
 					return funcionarios;
 				}
 				
-				try {
-					Long codigo = Long.parseLong(filter.getValorBusca());
-					funcionarios.add(dao.findByCodigo(codigo));
-				} catch (NumberFormatException e) {
-					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
-				}
+				funcionarios.add(buscarFuncionarioPor(filter.getValorBusca()));
 				
 			break;
 

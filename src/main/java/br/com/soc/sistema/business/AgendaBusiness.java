@@ -129,12 +129,7 @@ public class AgendaBusiness {
 					return agendas;
 				}
 				
-				try {
-					Long cod = Long.parseLong(filter.getValorBusca());
-					agendas.add(dao.findByCodigo(cod));
-				} catch (NumberFormatException e) {
-					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
-				}
+				agendas.add(buscarAgendaPor(filter.getValorBusca()));
 				
 			break;
 			

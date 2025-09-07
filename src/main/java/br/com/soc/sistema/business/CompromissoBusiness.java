@@ -145,12 +145,7 @@ public class CompromissoBusiness {
 					return compromissos;
 				}
 				
-				try {
-					Long cod = Long.parseLong(filter.getValorBusca());
-					compromissos.add(dao.findByCodigo(cod));
-				} catch (NumberFormatException e) {
-					throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
-				}
+				compromissos.add(buscarCompromissoPor(filter.getValorBusca()));
 				
 			break;
 			

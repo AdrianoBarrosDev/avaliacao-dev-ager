@@ -67,7 +67,7 @@
 							</div>
 						
 							<div class="input-group col-6">
-								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca"/>
+								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca" />
 								<s:select 
 									id="selectAlternativo" 
 									name=""
@@ -213,13 +213,17 @@
 			        if (opcoesCombo.value === '3') {
 			            inputPesquisa.removeAttribute("name");
 			            inputPesquisa.style.display = 'none';
+			            inputPesquisa.removeAttribute("required");
 			            selectAlternativo.style.display = 'inline-block';
 			            selectAlternativo.setAttribute("name", "filtrar.valorBusca");
+			            selectAlternativo.setAttribute("required", "true");
 			        } else {
 			            inputPesquisa.setAttribute("name", "filtrar.valorBusca");
 			            inputPesquisa.style.display = 'inline-block';
+			            inputPesquisa.setAttribute("required", "true");
 			            selectAlternativo.style.display = 'none';
 			            selectAlternativo.removeAttribute("name");
+			            selectAlternativo.removeAttribute("required");
 			        }
 			    }
 

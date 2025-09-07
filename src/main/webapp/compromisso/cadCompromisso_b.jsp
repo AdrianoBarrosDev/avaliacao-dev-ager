@@ -93,7 +93,7 @@
 							<tr>
 								<th class="colunaId"><s:text name="label.id"/></th>
 								<th style="width: 10vw"><s:text name="label.codigoFuncionario"/></th>
-								<th style="width: 12vw"><s:text name="label.nomeFuncionario"/></th>
+								<th style="width: 14vw"><s:text name="label.nomeFuncionario"/></th>
 								<th style="width: 10vw"><s:text name="label.codigoAgenda"/></th>
 								<th style="width: 14vw"><s:text name="label.nomeAgenda"/></th>
 								<th style="width: 8vw"><s:text name="label.data"/></th>
@@ -111,7 +111,7 @@
 									<tr>
 										<td class="colunaId">${rowid}</td>
 										<td style="width: 10vw">${codigoFuncionario}</td>
-										<td style="width: 12vw">${nomeFuncionario}</td>
+										<td style="width: 14vw">${nomeFuncionario}</td>
 										<td style="width: 10vw">${codigoAgenda}</td>
 										<td style="width: 14vw">${nomeAgenda}</td>
 										<td style="width: 8vw">${data}</td>

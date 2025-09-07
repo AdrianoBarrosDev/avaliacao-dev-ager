@@ -19,8 +19,25 @@ CREATE TABLE compromisso (
 	CONSTRAINT fk_codigoAgenda FOREIGN KEY(codigoAgenda) REFERENCES agenda(rowid) ON DELETE RESTRICT
 );
 
-INSERT INTO funcionario (nm_funcionario) VALUES ('João Pedro Alves Pereira'), ('Maria'), ('José'), ('Joana'), ('João'), ('Maria'), ('José'), ('Joana'), ('João'), ('Maria'), ('José'), ('Joana');
-INSERT INTO agenda(nm_agenda, periodoDisponivel) VALUES ('Agenda Clínica Odontológica', '1'), ('Agenda Clínica Cardiológica', '2'), ('Agenda Clínica Hospitalar', '3');
+INSERT INTO funcionario (nm_funcionario) VALUES 
+('João Pedro Alves Pereira'),
+('Maria Helena da Costa Silva'),
+('José Ricardo Monteiro Lima'),
+('Joana Beatriz Nogueira Prado'),
+('João Guilherme Rocha Soares'),
+('Maria Eduarda Fernandes Pinto'),
+('José Augusto Almeida Ramos'),
+('Joana Carolina Martins Sousa'),
+('João Marcelo Tavares Ribeiro'),
+('Maria Cecília Andrade Moura'),
+('José Henrique Castro Oliveira'),
+('Joana Lívia Cardoso Barreto');
+
+INSERT INTO agenda(nm_agenda, periodoDisponivel) VALUES 
+('Agenda Clínica Odontológica', '1'), 
+('Agenda Clínica Cardiológica', '2'), 
+('Agenda Clínica Hospitalar', '3');
+
 INSERT INTO compromisso(codigoFuncionario, codigoAgenda, data, horario) VALUES 
 (1, 1, '2025-09-12', '09:30'), 
 (2, 1, '2025-09-12', '10:00'),
