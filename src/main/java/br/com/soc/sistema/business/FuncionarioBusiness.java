@@ -23,8 +23,6 @@ public class FuncionarioBusiness {
 	
 	public void salvarFuncionario(FuncionarioVo funcionarioVo) {
 		try {
-			if(funcionarioVo.getNome() == null || funcionarioVo.getNome().isEmpty())
-				throw new IllegalArgumentException("Nome nao pode ser em branco");
 			
 			if(funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
 				editarFuncionario(funcionarioVo);
@@ -43,18 +41,35 @@ public class FuncionarioBusiness {
 	}
 	
 	public void criarFuncionario(FuncionarioVo funcionarioVo) {
-		dao.insertFuncionario(funcionarioVo);
+		try {
+	    	
+	    	validarFuncionario(funcionarioVo);
+	    
+		    dao.insertFuncionario(funcionarioVo);
+	        
+	    } catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
+	        throw new BusinessException("Erro ao inserir funcionário");
+	    }
+		
 	}
 	
 	public void editarFuncionario(FuncionarioVo funcionarioVo) {
-	    if (funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty()) 
-	        throw new IllegalArgumentException("ID do funcionario obrigatorio para atualizacao");
+	    try {	    	
+	    	
+	    	if (funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty()) 
+		        throw new IllegalArgumentException("ID do funcionario obrigatorio para atualizacao");
+	    	
+	    	validarFuncionario(funcionarioVo);
+		    
+		    if(buscarFuncionarioPor(funcionarioVo.getRowid()) == null)
+	    		throw new IllegalArgumentException("Esse ID de funcionario nao existe");
 	    
-	    if(buscarFuncionarioPor(funcionarioVo.getRowid()) == null)
-    		throw new IllegalArgumentException("Esse ID de funcionario nao existe");
-	    
-	    try {
 	        dao.updateFuncionario(funcionarioVo);
+	        
+	    } catch (IllegalArgumentException e) {
+	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao atualizar funcionário");
 	    }
@@ -108,10 +123,28 @@ public class FuncionarioBusiness {
 	
 	public FuncionarioVo buscarFuncionarioPor(String codigo) {
 		try {
+			
 			Long cod = Long.parseLong(codigo);
-			return dao.findByCodigo(cod);
-		}catch (NumberFormatException e) {
+			FuncionarioVo funcionario = dao.findByCodigo(cod);
+			
+			if(funcionario == null) 
+				throw new BusinessException("Funcionario nao encontrado para o ID informado");
+			
+			return funcionario;
+			
+		} catch (NumberFormatException e) {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
-		}
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    }
 	}
+	
+	public void validarFuncionario(FuncionarioVo vo) {
+		if (vo == null)
+	        throw new IllegalArgumentException("Funcionário inválido");
+
+	    if (vo.getNome() == null || vo.getNome().isEmpty())
+	        throw new IllegalArgumentException("Nome não pode ser em branco");
+	}
+	
 }
