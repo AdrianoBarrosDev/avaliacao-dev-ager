@@ -285,18 +285,23 @@
 			    const opcoesCombo = document.getElementById('opcoesCombo');
 			    const inputPesquisa = document.getElementById('inputPesquisa');
 			    
-			    opcoesCombo.addEventListener('change', function() {
-					
-			    	if (opcoesCombo.value === '6') {
-			      		inputPesquisa.setAttribute("type", "date");
-			      	} else if (opcoesCombo.value === '7') {
-			      		inputPesquisa.setAttribute("type", "time");
-			      	} else {
-			      		inputPesquisa.setAttribute("type", "text");
-			      	}
-			      	inputPesquisa.value = "";
-			    	
+			    function atualizarCampoPesquisa() {
+			        if (opcoesCombo.value === '6') {
+			            inputPesquisa.setAttribute("type", "date");
+			        } else if (opcoesCombo.value === '7') {
+			            inputPesquisa.setAttribute("type", "time");
+			        } else {
+			            inputPesquisa.setAttribute("type", "text");
+			        }
+			    }
+			    
+			    opcoesCombo.addEventListener('change', function () {
+			        inputPesquisa.value = "";
+			        atualizarCampoPesquisa();
 			    });
+
+			    atualizarCampoPesquisa();
+			    
 			});
 			
 		</script>

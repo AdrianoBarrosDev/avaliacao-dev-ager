@@ -1,9 +1,5 @@
 package br.com.soc.sistema.vo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 public class CompromissoVo {
 	
 	private String rowid;
@@ -70,6 +66,11 @@ public class CompromissoVo {
 	
 	public void setHorario(String horario) {
 		this.horario = horario;
+	}
+	
+	@Override
+	public String toString() {
+		return "CompromissoVo [codigoFuncionario=" + codigoFuncionario + ", codigoAgenda=" + codigoAgenda + ", data=" + data + ", horario=" + horario + "]";
 	}
 	
 }

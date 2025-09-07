@@ -1,6 +1,9 @@
 package br.com.soc.sistema.business;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +28,10 @@ public class CompromissoBusiness {
 	public void salvarCompromisso(CompromissoVo compromissoVo) {
 		try {
 			
-			if(compromissoVo.getCodigoAgenda() == null || compromissoVo.getCodigoAgenda().isEmpty())
-				throw new IllegalArgumentException("Codigo da agenda nao pode ser em branco");
-			
-			if(compromissoVo.getCodigoFuncionario() == null || compromissoVo.getCodigoFuncionario().isEmpty()) 
-				throw new IllegalArgumentException("Codigo do funcionario nao pode ser em branco");
-			
-			if(compromissoVo.getData() == null || compromissoVo.getData().isEmpty()) 
-				throw new IllegalArgumentException("Data nao pode ser em branco");
-			
-			if(compromissoVo.getHorario() == null || compromissoVo.getHorario().isEmpty()) 
-				throw new IllegalArgumentException("Horario nao pode ser em branco");
+			FuncionarioBusiness funcionarioBusiness = new FuncionarioBusiness();
+			if(funcionarioBusiness.buscarFuncionarioPor(compromissoVo.getCodigoFuncionario()) == null) {
+				throw new IllegalArgumentException("Nao foi encontrado nenhum funcionario com esse ID");
+			}
 			
 			AgendaBusiness agendaBusiness = new AgendaBusiness();
 			if(!agendaBusiness.verificarHorarioPermitidoAgenda(compromissoVo.getCodigoAgenda(), compromissoVo.getHorario())) {
@@ -59,22 +55,37 @@ public class CompromissoBusiness {
 	}
 	
 	public void criarCompromisso(CompromissoVo compromissoVo) {
-		dao.insertCompromisso(compromissoVo);
+		try {
+	    	
+	    	validarCompromisso(compromissoVo);
+	    
+	    	dao.insertCompromisso(compromissoVo);
+	        
+	    } catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
+	        throw new BusinessException("Erro ao inserir compromisso");
+	    }
 	}
 	
 	public void editarCompromisso(CompromissoVo compromissoVo) {
-	    if (compromissoVo.getRowid() == null || compromissoVo.getRowid().isEmpty()) 
-	        throw new IllegalArgumentException("ID do compromisso obrigatorio para atualizacao");
-	    
-	    if(buscarCompromissoPor(compromissoVo.getRowid()) == null)
-    		throw new IllegalArgumentException("Esse ID de compromisso nao existe");
-	    
 	    try {
+	    	
+	    	if (compromissoVo.getRowid() == null || compromissoVo.getRowid().isEmpty()) 
+		        throw new IllegalArgumentException("ID do compromisso obrigatorio para atualizacao");
+	    	
+	    	validarCompromisso(compromissoVo);
+		    
+		    if(buscarCompromissoPor(compromissoVo.getRowid()) == null)
+	    		throw new IllegalArgumentException("Esse ID de compromisso nao existe");
+	    	
 	    	dao.updateCompromisso(compromissoVo);
+	    	
+	    } catch (IllegalArgumentException e) {
+	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao atualizar compromisso");
 	    }
-	    
 	}
 	
 	public void excluirCompromisso(String codCompromisso) {
@@ -97,8 +108,15 @@ public class CompromissoBusiness {
 	
 	public CompromissoVo buscarCompromissoPor(String codigo) {
 		try {
+			
 			Long cod = Long.parseLong(codigo);
-			return dao.findByCodigo(cod);
+			CompromissoVo compromisso = dao.findByCodigo(cod);
+			
+			if(compromisso == null)
+				throw new BusinessException("Compromisso nao encontrado para o ID informado");
+			
+			return compromisso;
+			
 		} catch (NumberFormatException e) {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
 		}
@@ -203,6 +221,48 @@ public class CompromissoBusiness {
 		}
 		
 		return compromissos;
+		
+	}
+	
+	public void validarCompromisso(CompromissoVo vo) {
+		if(vo.getCodigoAgenda() == null || vo.getCodigoAgenda().isEmpty())
+			throw new IllegalArgumentException("Codigo da agenda nao pode ser em branco");
+		
+		if(vo.getCodigoFuncionario() == null || vo.getCodigoFuncionario().isEmpty()) 
+			throw new IllegalArgumentException("Codigo do funcionario nao pode ser em branco");
+		
+		if(vo.getData() == null || vo.getData().isEmpty()) 
+			throw new IllegalArgumentException("Data nao pode ser em branco");
+		
+		if(vo.getHorario() == null || vo.getHorario().isEmpty()) 
+			throw new IllegalArgumentException("Horario nao pode ser em branco");
+		
+		validarDataCompromisso(vo.getData());
+		validarHorarioCompromisso(vo.getHorario());
+		
+	}
+	
+	public void validarDataCompromisso(String data) {
+		
+	    DateTimeFormatter formatoPermitido = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+	    try {
+	        LocalDate.parse(data, formatoPermitido);
+	    } catch (DateTimeParseException e) {
+	    	throw new IllegalArgumentException("Formato de data invalido. Use yyyy-MM-dd");
+	    }
+	    
+	}
+	
+	public void validarHorarioCompromisso(String horario) {
+		
+		DateTimeFormatter formatoPermitido = DateTimeFormatter.ofPattern("HH:mm");
+		
+		try {
+	        LocalTime.parse(horario, formatoPermitido);
+	    } catch (DateTimeParseException e) {
+	    	throw new IllegalArgumentException("Formato de horario invalido. Use HH:mm");
+	    }
 		
 	}
 	

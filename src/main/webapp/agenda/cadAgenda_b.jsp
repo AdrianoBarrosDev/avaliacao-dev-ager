@@ -209,26 +209,26 @@
 			    const inputPesquisa = document.getElementById('inputPesquisa');
 			    const selectAlternativo = document.getElementById('selectAlternativo');
 			    
-			    opcoesCombo.addEventListener('change', function() {
-					
-					if (opcoesCombo.value === '3') {
-						
-			      		inputPesquisa.removeAttribute("name");
-			        	inputPesquisa.style.display = 'none';
-			        	selectAlternativo.style.display = 'inline-block';
-			        	selectAlternativo.setAttribute("name", "filtrar.valorBusca");
-			        	
-			      	} else {
+			    function atualizarCampoPesquisa() {
+			        if (opcoesCombo.value === '3') {
+			            inputPesquisa.removeAttribute("name");
+			            inputPesquisa.style.display = 'none';
+			            selectAlternativo.style.display = 'inline-block';
+			            selectAlternativo.setAttribute("name", "filtrar.valorBusca");
+			        } else {
+			            inputPesquisa.setAttribute("name", "filtrar.valorBusca");
+			            inputPesquisa.style.display = 'inline-block';
+			            selectAlternativo.style.display = 'none';
+			            selectAlternativo.removeAttribute("name");
+			        }
+			    }
 
-						inputPesquisa.setAttribute("name", "filtrar.valorBusca");
-			        	inputPesquisa.style.display = 'inline-block';
-			       	 	selectAlternativo.style.display = 'none';
-			       	 	selectAlternativo.removeAttribute("name");
-			       	 	
-			      	}
-					inputPesquisa.value = "";
-			    
+			    opcoesCombo.addEventListener('change', function () {
+			        inputPesquisa.value = "";
+			        atualizarCampoPesquisa();
 			    });
+
+			    atualizarCampoPesquisa();
 			 	
 			});
 			

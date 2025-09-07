@@ -8,5 +8,9 @@
      <endpoint name="WebServiceAgendasImpl" 
         implementation="br.com.soc.sistema.soap.WebServiceAgendasImpl" 
         url-pattern="/soap/agendas" ></endpoint>
+        
+    <endpoint name="WebServiceCompromissosImpl" 
+        implementation="br.com.soc.sistema.soap.WebServiceCompromissosImpl" 
+        url-pattern="/soap/compromissos" ></endpoint>
      
 </endpoints>

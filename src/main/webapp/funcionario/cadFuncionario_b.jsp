@@ -79,7 +79,7 @@
 					</s:form>
 					
 					<div>
-						<button id="btnLimpar" class="btnTransparente border-0 w-auto" onclick="document.location.href='todosAgendas.action'">
+						<button id="btnLimpar" class="btnTransparente border-0 w-auto" onclick="document.location.href='todosFuncionarios.action'">
 							<s:text name="LIMPAR"/>
 						</button>
 					</div>	
