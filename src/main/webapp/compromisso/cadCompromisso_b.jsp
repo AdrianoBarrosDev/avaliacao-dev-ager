@@ -92,9 +92,11 @@
 						<thead>
 							<tr>
 								<th class="colunaId"><s:text name="label.id"/></th>
-								<th><s:text name="label.codigoFuncionario"/></th>
-								<th><s:text name="label.codigoAgenda"/></th>
-								<th><s:text name="label.data"/></th>
+								<th style="width: 10vw"><s:text name="label.codigoFuncionario"/></th>
+								<th style="width: 12vw"><s:text name="label.nomeFuncionario"/></th>
+								<th style="width: 10vw"><s:text name="label.codigoAgenda"/></th>
+								<th style="width: 14vw"><s:text name="label.nomeAgenda"/></th>
+								<th style="width: 8vw"><s:text name="label.data"/></th>
 								<th><s:text name="label.horario"/></th>
 								<th class="text-end mt-5"><s:text name="label.acao"/></th>
 							</tr>
@@ -108,9 +110,11 @@
 								<s:iterator value="compromissos" >
 									<tr>
 										<td class="colunaId">${rowid}</td>
-										<td>${codigoFuncionario}</td>
-										<td>${codigoAgenda}</td>
-										<td>${data}</td>
+										<td style="width: 10vw">${codigoFuncionario}</td>
+										<td style="width: 12vw">${nomeFuncionario}</td>
+										<td style="width: 10vw">${codigoAgenda}</td>
+										<td style="width: 14vw">${nomeAgenda}</td>
+										<td style="width: 8vw">${data}</td>
 										<td>${horario}</td>
 										<td>
 											<div class="d-flex justify-content-end align-items-center gap-2">
