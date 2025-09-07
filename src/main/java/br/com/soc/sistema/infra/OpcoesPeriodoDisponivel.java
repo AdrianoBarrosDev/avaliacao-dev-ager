@@ -5,11 +5,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 import br.com.soc.sistema.exception.BusinessException;
 
+@XmlType(name = "OpcoesPeriodoDisponivel")
+@XmlEnum
 public enum OpcoesPeriodoDisponivel {
+	
+	@XmlEnumValue("MANHA")
 	MANHA("1", "Manhã"),
+	
+	@XmlEnumValue("TARDE")
 	TARDE("2", "Tarde"),
+	
+	@XmlEnumValue("AMBOS")
 	AMBOS("3", "Ambos");
 	
 	private final String codigo;

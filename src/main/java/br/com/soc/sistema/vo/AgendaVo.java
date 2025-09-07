@@ -29,6 +29,10 @@ public class AgendaVo {
 	public OpcoesPeriodoDisponivel getPeriodoDisponivel() {
 		return periodoDisponivel;
 	}
+	
+	public void setPeriodoDisponivel(OpcoesPeriodoDisponivel periodoDisponivel) {
+	    this.periodoDisponivel = periodoDisponivel;
+	}
 
 	public void setPeriodoDisponivel(String codigo) {
 		this.periodoDisponivel = OpcoesPeriodoDisponivel.buscarPorCodigo(codigo);

@@ -26,12 +26,6 @@ public class AgendaBusiness {
 	public void salvarAgenda(AgendaVo agendaVo) {
 		try {
 			
-			if(agendaVo.getNome() == null || agendaVo.getNome().isEmpty())
-				throw new IllegalArgumentException("Nome nao pode ser em branco");
-			
-			if(agendaVo.getPeriodoDisponivel() == null)
-				throw new IllegalArgumentException("Periodo disponivel nao pode ser em branco");
-			
 			if(agendaVo.getRowid() != null && !agendaVo.getRowid().isEmpty()) {
 				editarAgenda(agendaVo);
 			} else {
@@ -49,18 +43,34 @@ public class AgendaBusiness {
 	}
 	
 	public void criarAgenda(AgendaVo agendaVo) {
-		dao.insertAgenda(agendaVo);
+		try {
+	    	
+	    	validarAgenda(agendaVo);
+	    
+	    	dao.insertAgenda(agendaVo);
+	        
+	    } catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
+	        throw new BusinessException("Erro ao inserir agenda");
+	    }
 	}
 	
 	public void editarAgenda(AgendaVo agendaVo) {
-	    if (agendaVo.getRowid() == null || agendaVo.getRowid().isEmpty()) 
-	        throw new IllegalArgumentException("ID da agenda obrigatorio para atualizacao");
-	    
-	    if(buscarAgendaPor(agendaVo.getRowid()) == null)
-    		throw new IllegalArgumentException("Esse ID de agenda nao existe");
-	    
 	    try {
+	    	
+	    	if (agendaVo.getRowid() == null || agendaVo.getRowid().isEmpty()) 
+		        throw new IllegalArgumentException("ID da agenda obrigatorio para atualizacao");
+	    	
+	    	validarAgenda(agendaVo);
+		    
+		    if(buscarAgendaPor(agendaVo.getRowid()) == null)
+	    		throw new IllegalArgumentException("Esse ID de agenda nao existe");
+	    	
 	    	dao.updateAgenda(agendaVo);
+	    	
+	    } catch (IllegalArgumentException e) {
+	        throw e;
 	    } catch (Exception e) {
 	        throw new BusinessException("Erro ao atualizar agenda");
 	    }
@@ -146,13 +156,33 @@ public class AgendaBusiness {
 	}
 	
 	public AgendaVo buscarAgendaPor(String codigo) {
-		
 		try {
+			
 			Long cod = Long.parseLong(codigo);
-			return dao.findByCodigo(cod);
+			AgendaVo agenda = dao.findByCodigo(cod);
+			
+			if(agenda == null)
+				throw new BusinessException("Agenda nao encontrada para o ID informado");
+			
+			return agenda;
+			
 		} catch (NumberFormatException e) {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
-		}
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    }
+	}
+	
+	public void validarAgenda(AgendaVo vo) {
+		
+		if(vo == null)
+			throw new IllegalArgumentException("Agenda invalida");
+		
+		if(vo.getNome() == null || vo.getNome().isEmpty())
+			throw new IllegalArgumentException("Nome nao pode ser em branco");
+		
+		if(vo.getPeriodoDisponivel() == null)
+			throw new IllegalArgumentException("Periodo disponivel nao pode ser em branco");
 		
 	}
 	
