@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF8">
+		<meta charset="UTF-8">
 		<title><s:text name="label.titulo.pagina"/></title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
 		<link rel="stylesheet" href="/avaliacao/css/navCustomizada.css" />
@@ -40,7 +40,7 @@
 			
 			<div class="container-fluid p-5" style="margin-left: 260px;">
 			
-				<h1 class="mt-4">Funcionários</h1>
+				<h1 class="mt-4"><s:text name="label.tituloFuncionarios"/></h1>
 			
 				<div class="d-flex justify-content-between align-items-start mb-4 w-100">
 					<s:form action="/filtrarFuncionarios.action" cssClass="w-75">

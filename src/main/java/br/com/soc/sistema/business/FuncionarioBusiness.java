@@ -10,7 +10,7 @@ import br.com.soc.sistema.vo.FuncionarioVo;
 
 public class FuncionarioBusiness {
 
-	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caracter no lugar de um numero";
+	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caractere no lugar de um número";
 	private FuncionarioDao dao;
 	
 	public FuncionarioBusiness() {
@@ -48,12 +48,12 @@ public class FuncionarioBusiness {
 	    try {	    	
 	    	
 	    	if (funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty()) 
-		        throw new IllegalArgumentException("ID do funcionario obrigatorio para atualizacao");
+		        throw new IllegalArgumentException("ID do funcionário obrigatório para atualização");
 	    	
 	    	validarFuncionario(funcionarioVo);
 		    
 		    if(buscarFuncionarioPor(funcionarioVo.getRowid()) == null)
-	    		throw new IllegalArgumentException("Esse ID de funcionario nao existe");
+	    		throw new IllegalArgumentException("Esse ID de funcionário não existe");
 	    
 	        dao.updateFuncionario(funcionarioVo);
 	        
@@ -69,17 +69,17 @@ public class FuncionarioBusiness {
 		try {
 			
 			if(codFuncionario == null || codFuncionario.isEmpty())
-				throw new IllegalArgumentException("ID do funcionario obrigatorio para exclusao");
+				throw new IllegalArgumentException("ID do funcionário obrigatório para exclusão");
 			
 			if(buscarFuncionarioPor(codFuncionario) == null)
-	    		throw new IllegalArgumentException("Esse ID de funcionario nao existe");
+	    		throw new IllegalArgumentException("Esse ID de funcionário não existe");
 			
 			dao.deleteFuncionario(codFuncionario);
 			
 		} catch (IllegalArgumentException e) {
 	        throw e;
 	    } catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
+			throw new BusinessException("Não foi possível realizar a exclusão do registro");
 		}
 	}
 	
@@ -112,7 +112,7 @@ public class FuncionarioBusiness {
 			FuncionarioVo funcionario = dao.findByCodigo(cod);
 			
 			if(funcionario == null) 
-				throw new BusinessException("Funcionario nao encontrado para o ID informado");
+				throw new BusinessException("Funcionário não encontrado para o ID informado");
 			
 			return funcionario;
 			

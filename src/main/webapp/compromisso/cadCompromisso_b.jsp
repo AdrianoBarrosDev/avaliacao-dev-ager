@@ -41,7 +41,7 @@
 			
 			<div class="container-fluid p-5" style="margin-left: 260px;">
 			
-				<h1 class="mt-4">Compromissos</h1>
+				<h1 class="mt-4"><s:text name="label.tituloCompromissos"/></h1>
 				
 				<div class="d-flex justify-content-between align-items-start mb-4 w-100">
 				

@@ -15,7 +15,7 @@ import br.com.soc.sistema.vo.CompromissoVo;
 
 public class CompromissoBusiness {
 	
-	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caracter no lugar de um numero";
+	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caractere no lugar de um número";
 	private CompromissoDao dao;
 	
 	public CompromissoBusiness() {
@@ -52,12 +52,12 @@ public class CompromissoBusiness {
 	    try {
 	    	
 	    	if (compromissoVo.getRowid() == null || compromissoVo.getRowid().isEmpty()) 
-		        throw new IllegalArgumentException("ID do compromisso obrigatorio para atualizacao");
+		        throw new IllegalArgumentException("ID do compromisso obrigatório para atualização");
 	    	
 	    	validarCompromisso(compromissoVo);
 		    
 		    if(buscarCompromissoPor(compromissoVo.getRowid()) == null)
-	    		throw new IllegalArgumentException("Esse ID de compromisso nao existe");
+	    		throw new IllegalArgumentException("Esse ID de compromisso não existe");
 	    	
 	    	dao.updateCompromisso(compromissoVo);
 	    	
@@ -72,17 +72,17 @@ public class CompromissoBusiness {
 		try {
 			
 			if(codCompromisso == null || codCompromisso.isEmpty())
-				throw new IllegalArgumentException("ID do compromisso obrigatorio para exclusao");
+				throw new IllegalArgumentException("ID do compromisso obrigatório para exclusão");
 			
 			if(buscarCompromissoPor(codCompromisso) == null)
-	    		throw new IllegalArgumentException("Esse ID de compromisso nao existe");
+	    		throw new IllegalArgumentException("Esse ID de compromisso não existe");
 			
 			dao.deleteCompromisso(codCompromisso);
 			
 		} catch (IllegalArgumentException e) {
 	        throw e;
 	    } catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a exclusao do registro");
+			throw new BusinessException("Não foi possível realizar a exclusão do registro");
 		}
 	}
 	
@@ -93,7 +93,7 @@ public class CompromissoBusiness {
 			CompromissoVo compromisso = dao.findByCodigo(cod);
 			
 			if(compromisso == null)
-				throw new BusinessException("Compromisso nao encontrado para o ID informado");
+				throw new BusinessException("Compromisso não encontrado para o ID informado");
 			
 			return compromisso;
 			
@@ -105,7 +105,7 @@ public class CompromissoBusiness {
 	public List<CompromissoVo> filtrarCompromissos(String dataInicialStr, String dataFinalStr) {
 		try {
 			if(dataInicialStr.isEmpty() || dataFinalStr.isEmpty())
-				throw new IllegalArgumentException("As datas nao podem ser em branco");
+				throw new IllegalArgumentException("As datas não podem ser em branco");
 			
 			LocalDate dataInicial = LocalDate.parse(dataInicialStr);
 			LocalDate dataFinal = LocalDate.parse(dataFinalStr);
@@ -201,16 +201,16 @@ public class CompromissoBusiness {
 	
 	public void validarCompromisso(CompromissoVo vo) {
 		if(vo.getCodigoAgenda() == null || vo.getCodigoAgenda().isEmpty())
-			throw new IllegalArgumentException("Codigo da agenda nao pode ser em branco");
+			throw new IllegalArgumentException("Código da agenda não pode ser em branco");
 		
 		if(vo.getCodigoFuncionario() == null || vo.getCodigoFuncionario().isEmpty()) 
-			throw new IllegalArgumentException("Codigo do funcionario nao pode ser em branco");
+			throw new IllegalArgumentException("Código do funcionário não pode ser em branco");
 		
 		if(vo.getData() == null || vo.getData().isEmpty()) 
-			throw new IllegalArgumentException("Data nao pode ser em branco");
+			throw new IllegalArgumentException("Data não pode ser em branco");
 		
 		if(vo.getHorario() == null || vo.getHorario().isEmpty()) 
-			throw new IllegalArgumentException("Horario nao pode ser em branco");
+			throw new IllegalArgumentException("Horário não pode ser em branco");
 		
 		validarDataCompromisso(vo.getData());
 		validarHorarioCompromisso(vo.getHorario());
@@ -221,7 +221,7 @@ public class CompromissoBusiness {
 		AgendaBusiness agendaBusiness = new AgendaBusiness();
 		if(!agendaBusiness.verificarHorarioPermitidoAgenda(vo.getCodigoAgenda(), vo.getHorario())) {
 			AgendaVo agendaVo = agendaBusiness.buscarAgendaPor(vo.getCodigoAgenda());
-			throw new BusinessException("Horario invalido para essa agenda. Essa agenda só permite compromissos no perído: " + agendaVo.getPeriodoDisponivel());
+			throw new BusinessException("Horário inválido para essa agenda. Essa agenda só permite compromissos no período: " + agendaVo.getPeriodoDisponivel());
 		}
 		
 	}
@@ -233,7 +233,7 @@ public class CompromissoBusiness {
 	    try {
 	        LocalDate.parse(data, formatoPermitido);
 	    } catch (DateTimeParseException e) {
-	    	throw new IllegalArgumentException("Formato de data invalido. Use yyyy-MM-dd");
+	    	throw new IllegalArgumentException("Formato de data inválido. Use yyyy-MM-dd");
 	    }
 	    
 	}
@@ -245,7 +245,7 @@ public class CompromissoBusiness {
 		try {
 	        LocalTime.parse(horario, formatoPermitido);
 	    } catch (DateTimeParseException e) {
-	    	throw new IllegalArgumentException("Formato de horario invalido. Use HH:mm");
+	    	throw new IllegalArgumentException("Formato de horário inválido. Use HH:mm");
 	    }
 		
 	}

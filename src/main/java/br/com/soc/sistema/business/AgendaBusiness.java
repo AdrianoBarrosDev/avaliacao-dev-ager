@@ -13,7 +13,7 @@ import br.com.soc.sistema.vo.AgendaVo;
 
 public class AgendaBusiness {
 	
-	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caracter no lugar de um numero";
+	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caractere no lugar de um número";
 	private AgendaDao dao;
 	
 	public AgendaBusiness() {
@@ -50,12 +50,12 @@ public class AgendaBusiness {
 	    try {
 	    	
 	    	if (agendaVo.getRowid() == null || agendaVo.getRowid().isEmpty()) 
-		        throw new IllegalArgumentException("ID da agenda obrigatorio para atualizacao");
+		        throw new IllegalArgumentException("ID da agenda obrigatório para atualização");
 	    	
 	    	validarAgenda(agendaVo);
 		    
 		    if(buscarAgendaPor(agendaVo.getRowid()) == null)
-	    		throw new IllegalArgumentException("Esse ID de agenda nao existe");
+	    		throw new IllegalArgumentException("Esse ID de agenda não existe");
 	    	
 	    	dao.updateAgenda(agendaVo);
 	    	
@@ -71,10 +71,10 @@ public class AgendaBusiness {
 		try {
 			
 			if(codAgenda == null || codAgenda.isEmpty())
-				throw new IllegalArgumentException("ID da agenda obrigatorio para exclusao");
+				throw new IllegalArgumentException("ID da agenda obrigatório para exclusão");
 			
 			if(buscarAgendaPor(codAgenda) == null)
-	    		throw new IllegalArgumentException("Esse ID de agenda nao existe");
+	    		throw new IllegalArgumentException("Esse ID de agenda não existe");
 			
 			dao.deleteAgenda(codAgenda);
 			
@@ -83,7 +83,7 @@ public class AgendaBusiness {
 	    } catch (SQLIntegrityConstraintViolationException e) {
 	        throw new BusinessException("Não é possível excluir uma agenda que tem compromissos cadastrados");
 	    } catch (Exception e) {
-			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
+			throw new BusinessException("Não foi possível realizar a exclusão do registro");
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class AgendaBusiness {
 			}
 			
 		} catch(Exception e) {
-			throw new BusinessException("Nao foi possivel utilizar o horario");
+			throw new BusinessException("Não foi possível utilizar o horário");
 		}
 		return false;
 	}
@@ -149,7 +149,7 @@ public class AgendaBusiness {
 			AgendaVo agenda = dao.findByCodigo(cod);
 			
 			if(agenda == null)
-				throw new BusinessException("Agenda nao encontrada para o ID informado");
+				throw new BusinessException("Agenda não encontrada para o ID informado");
 			
 			return agenda;
 			
@@ -163,13 +163,13 @@ public class AgendaBusiness {
 	public void validarAgenda(AgendaVo vo) {
 		
 		if(vo == null)
-			throw new IllegalArgumentException("Agenda invalida");
+			throw new IllegalArgumentException("Agenda inválida");
 		
 		if(vo.getNome() == null || vo.getNome().isEmpty())
-			throw new IllegalArgumentException("Nome nao pode ser em branco");
+			throw new IllegalArgumentException("Nome não pode ser em branco");
 		
 		if(vo.getPeriodoDisponivel() == null)
-			throw new IllegalArgumentException("Periodo disponivel nao pode ser em branco");
+			throw new IllegalArgumentException("Período disponível não pode ser em branco");
 		
 	}
 	
