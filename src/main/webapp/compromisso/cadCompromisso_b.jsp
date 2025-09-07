@@ -141,9 +141,9 @@
 				
 				<div class="d-flex justify-content-between align-items-center">
 					
-					<s:url action="novoCompromissos" var="novo"/>
+					<s:url action="salvarCompromissos" var="salvar"/>
 									
-					<a href="${novo}" class="btnNovo">
+					<a href="${salvar}" class="btnNovo">
 						<s:text name="label.novo"/>
 					</a>
 					

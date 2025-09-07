@@ -32,7 +32,7 @@ public class FuncionarioAction extends Action {
 		return SUCCESS;
 	}
 	
-	public String novo() {
+	public String salvar() {
 		if(funcionarioVo.getNome() == null)
 			return INPUT;
 		

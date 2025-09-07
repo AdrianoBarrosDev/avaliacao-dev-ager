@@ -33,7 +33,7 @@ public class AgendaAction extends Action {
 		return SUCCESS;
 	}
 	
-	public String novo() {
+	public String salvar() {
 		
 		if(agendaVo.getNome() == null || agendaVo.getPeriodoDisponivel() == null)
 			return INPUT;

@@ -79,7 +79,7 @@
 					</s:form>
 					
 					<div>
-						<button id="btnLimpar" class="btnTransparente border-0 w-auto" onclick="document.location.href='todosFuncionarios.action'">
+						<button id="btnLimpar" class="btnTransparente border-0 w-auto" onclick="document.location.href='todosAgendas.action'">
 							<s:text name="LIMPAR"/>
 						</button>
 					</div>	
@@ -131,9 +131,9 @@
 					
 				</div>
 				
-				<s:url action="novoFuncionarios" var="novo"/>
+				<s:url action="salvarFuncionarios" var="salvar"/>
 										
-				<a href="${novo}" class="btnNovo">
+				<a href="${salvar}" class="btnNovo">
 					<s:text name="label.novo"/>
 				</a>
 				

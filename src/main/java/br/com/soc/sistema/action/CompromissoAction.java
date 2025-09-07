@@ -32,7 +32,7 @@ public class CompromissoAction extends Action {
 		return SUCCESS;
 	}
 	
-	public String novo() {
+	public String salvar() {
 		if(compromissoVo.getCodigoAgenda() == null || compromissoVo.getCodigoFuncionario() == null || compromissoVo.getData() == null || compromissoVo.getHorario() == null)
 			return INPUT;
 		

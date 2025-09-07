@@ -38,6 +38,10 @@ public class FuncionarioBusiness {
 		
 	}
 	
+	public void editarFuncionario(FuncionarioVo funcionarioVo) {
+		
+	}
+	
 	public void excluirFuncionario(FuncionarioVo funcionarioVo) {
 		try {
 			dao.deleteFuncionario(funcionarioVo);

@@ -145,9 +145,9 @@
 					
 				</div>
 				
-				<s:url action="novoAgendas" var="novo"/>
+				<s:url action="salvarAgendas" var="salvar"/>
 									
-				<a href="${novo}" class="btnNovo">
+				<a href="${salvar}" class="btnNovo">
 					<s:text name="label.novo"/>
 				</a>
 

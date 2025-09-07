@@ -43,7 +43,7 @@
 				
 				<h1 class="mt-4">Novo Compromisso</h1>
 				
-				<s:form action="/novoCompromissos.action">
+				<s:form action="/salvarCompromissos.action">
 	
 					<div class="card mt-5">
 						

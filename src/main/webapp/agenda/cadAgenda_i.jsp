@@ -43,7 +43,7 @@
 			
 				<h1 class="mt-4">Nova Agenda</h1>
 				
-				<s:form action="/novoAgendas.action">
+				<s:form action="/salvarAgendas.action">
 	
 					<div class="card mt-5">
 						

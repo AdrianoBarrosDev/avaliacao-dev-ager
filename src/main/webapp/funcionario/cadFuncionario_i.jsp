@@ -42,7 +42,7 @@
 				
 				<h1 class="mt-4">Novo Funcionário</h1>
 			
-				<s:form action="/novoFuncionarios.action">
+				<s:form action="/salvarFuncionarios.action">
 	
 					<div class="card mt-5">
 						
