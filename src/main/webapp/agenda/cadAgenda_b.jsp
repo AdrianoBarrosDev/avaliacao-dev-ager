@@ -42,12 +42,12 @@
 			
 				<h1 class="mt-4">Agendas</h1>
 				
-				<div class="row mb-4">
-					<s:form action="/filtrarAgendas.action">
+				<div class="d-flex justify-content-between align-items-start mb-4 w-100">
+					<s:form action="/filtrarAgendas.action" cssClass="w-75">
 						
-						<div class="d-flex justify-content-start align-items-center gap-5" style="height: 40px">
+						<div class="row d-flex justify-content-start align-items-center gap-3" >
 						
-							<div class="input-group" style="width: auto">
+							<div class="input-group d-flex align-items-center col-6 w-auto">
 							    <span class="input-group-text">
 							        <strong><s:text name="label.buscar.por"/></strong>
 							    </span>
@@ -61,11 +61,12 @@
 							        headerValue="Escolha..." 
 							        listKey="%{codigo}" 
 							        listValue="%{descricao}"
-							        value="filtrar.opcoesCombo.codigo"								
+							        value="filtrar.opcoesCombo.codigo"
+							        required="true"							
 							    />
 							</div>
 						
-							<div class="input-group">
+							<div class="input-group col-6">
 								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca"/>
 								<s:select 
 									id="selectAlternativo" 
@@ -86,7 +87,14 @@
 							
 						</div>
 						
-					</s:form>		
+					</s:form>
+					
+					<div>
+						<button id="btnLimpar" class="btnTransparente border-0 w-auto" onclick="document.location.href='todosAgendas.action'">
+							<s:text name="LIMPAR"/>
+						</button>
+					</div>
+						
 				</div>
 				
 				<div class="tabela-wrapper mb-5">
@@ -221,6 +229,7 @@
 					inputPesquisa.value = "";
 			    
 			    });
+			 	
 			});
 			
 		</script>

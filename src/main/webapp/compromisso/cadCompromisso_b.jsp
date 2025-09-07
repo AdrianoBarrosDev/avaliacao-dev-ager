@@ -80,7 +80,7 @@
 					</s:form>
 					
 					<div>
-						<button class="btnTransparente border-0 w-auto">
+						<button id="btnLimpar" class="btnTransparente border-0 w-auto" onclick="document.location.href='todosCompromissos.action'">
 							<s:text name="LIMPAR"/>
 						</button>
 					</div>

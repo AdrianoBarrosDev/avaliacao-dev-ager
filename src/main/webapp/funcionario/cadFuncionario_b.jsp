@@ -42,12 +42,12 @@
 			
 				<h1 class="mt-4">Funcionários</h1>
 			
-				<div class="row mb-4">
-					<s:form action="/filtrarFuncionarios.action">
+				<div class="d-flex justify-content-between align-items-start mb-4 w-100">
+					<s:form action="/filtrarFuncionarios.action" cssClass="w-75">
 						
-						<div class="d-flex justify-content-start align-items-center gap-5" style="height: 40px">
+						<div class="row d-flex justify-content-start align-items-center gap-3" >
 						
-							<div class="input-group" style="width: auto">
+							<div class="input-group d-flex align-items-center col-6 w-auto">
 							    <span class="input-group-text">
 							        <strong><s:text name="label.buscar.por"/></strong>
 							    </span>
@@ -66,7 +66,7 @@
 							    />
 							</div>
 						
-							<div class="input-group">
+							<div class="input-group col-6">
 								<s:textfield cssClass="form-control inputPesquisar" id="inputPesquisa" name="filtrar.valorBusca" required="true" />
 								<s:fielderror />
 								<button class="btnPesquisar" type="submit">
@@ -76,7 +76,13 @@
 							
 						</div>
 						
-					</s:form>		
+					</s:form>
+					
+					<div>
+						<button id="btnLimpar" class="btnTransparente border-0 w-auto" onclick="document.location.href='todosFuncionarios.action'">
+							<s:text name="LIMPAR"/>
+						</button>
+					</div>	
 				</div>
 	
 				<div class="tabela-wrapper mb-5">
@@ -188,9 +194,11 @@
 			    const opcoesCombo = document.getElementById('opcoesCombo');
 			    const inputPesquisa = document.getElementById('inputPesquisa');
 			    
+			    // Limpa quando muda os campos do filtro
 			    opcoesCombo.addEventListener('change', function () {
 			    	inputPesquisa.value = "";
 				});
+			 	
 			});
 			
 		</script>
