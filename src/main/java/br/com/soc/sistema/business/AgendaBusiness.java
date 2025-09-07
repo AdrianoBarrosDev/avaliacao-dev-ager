@@ -1,5 +1,6 @@
 package br.com.soc.sistema.business;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +91,8 @@ public class AgendaBusiness {
 			
 		} catch (IllegalArgumentException e) {
 	        throw e;
+	    } catch (SQLIntegrityConstraintViolationException e) {
+	        throw new BusinessException("Não é possível excluir uma agenda que tem compromissos cadastrados");
 	    } catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a exclusão do registro");
 		}
