@@ -24,22 +24,40 @@ public class AgendaBusiness {
 	}
 	
 	public void salvarAgenda(AgendaVo agendaVo) {
-		
 		try {
 			
-			if(agendaVo.getNome().isEmpty() || agendaVo.getPeriodoDisponivel() == null)
-				throw new IllegalArgumentException("Nome ou periodo disponivel nao podem ser em branco");
+			if(agendaVo.getNome() == null || agendaVo.getNome().isEmpty())
+				throw new IllegalArgumentException("Nome nao pode ser em branco");
 			
-			if(agendaVo.getRowid().isEmpty()) {
-				dao.insertAgenda(agendaVo);
+			if(agendaVo.getPeriodoDisponivel() == null)
+				throw new IllegalArgumentException("Periodo disponivel nao pode ser em branco");
+			
+			if(agendaVo.getRowid() != null && !agendaVo.getRowid().isEmpty()) {
+				editarAgenda(agendaVo);
 			} else {
-				dao.updateAgenda(agendaVo);
+				criarAgenda(agendaVo);
 			}
 			
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
-
+		
+	}
+	
+	public void criarAgenda(AgendaVo agendaVo) {
+		dao.insertAgenda(agendaVo);
+	}
+	
+	public void editarAgenda(AgendaVo agendaVo) {
+	    if (agendaVo.getRowid() == null || agendaVo.getRowid().isEmpty()) 
+	        throw new IllegalArgumentException("ID da agenda obrigatorio para atualizacao");
+	    
+	    if(buscarAgendaPor(agendaVo.getRowid()) == null)
+    		throw new IllegalArgumentException("Esse ID de agenda nao existe");
+	    
+	    dao.updateAgenda(agendaVo);
 	}
 	
 	public void excluirAgenda(AgendaVo agendaVo) {

@@ -24,25 +24,52 @@ public class CompromissoBusiness {
 	
 	public void salvarCompromisso(CompromissoVo compromissoVo) {
 		try {
-			if(compromissoVo.getCodigoAgenda().isEmpty() || compromissoVo.getCodigoFuncionario().isEmpty()) 
-				throw new IllegalArgumentException("Codigo da agenda e do funcionario nao pode ser em branco");
+			
+			if(compromissoVo.getCodigoAgenda() == null || compromissoVo.getCodigoAgenda().isEmpty())
+				throw new IllegalArgumentException("Codigo da agenda nao pode ser em branco");
+			
+			if(compromissoVo.getCodigoFuncionario() == null || compromissoVo.getCodigoFuncionario().isEmpty()) 
+				throw new IllegalArgumentException("Codigo do funcionario nao pode ser em branco");
+			
+			if(compromissoVo.getData() == null || compromissoVo.getData().isEmpty()) 
+				throw new IllegalArgumentException("Data nao pode ser em branco");
+			
+			if(compromissoVo.getHorario() == null || compromissoVo.getHorario().isEmpty()) 
+				throw new IllegalArgumentException("Horario nao pode ser em branco");
 			
 			AgendaBusiness agendaBusiness = new AgendaBusiness();
 			if(!agendaBusiness.verificarHorarioPermitidoAgenda(compromissoVo.getCodigoAgenda(), compromissoVo.getHorario())) {
 				throw new BusinessException("Horario invalido para essa agenda");
 			}
 			
-			if(compromissoVo.getRowid().isEmpty()) {
-				dao.insertCompromisso(compromissoVo);
+			if(compromissoVo.getRowid() != null && !compromissoVo.getRowid().isEmpty()) {
+				editarCompromisso(compromissoVo);
 			} else {
-				dao.updateCompromisso(compromissoVo);
+				criarCompromisso(compromissoVo);
 			}
 			
-		} catch (BusinessException e) {
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (BusinessException e) {
 			throw e;
 		} catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
+		
+	}
+	
+	public void criarCompromisso(CompromissoVo compromissoVo) {
+		dao.insertCompromisso(compromissoVo);
+	}
+	
+	public void editarCompromisso(CompromissoVo compromissoVo) {
+	    if (compromissoVo.getRowid() == null || compromissoVo.getRowid().isEmpty()) 
+	        throw new IllegalArgumentException("ID do compromisso obrigatorio para atualizacao");
+	    
+	    if(buscarCompromissoPor(compromissoVo.getRowid()) == null)
+    		throw new IllegalArgumentException("Esse ID de compromisso nao existe");
+	    
+	    dao.updateCompromisso(compromissoVo);
 	}
 	
 	public void excluirCompromisso(CompromissoVo compromissoVo) {

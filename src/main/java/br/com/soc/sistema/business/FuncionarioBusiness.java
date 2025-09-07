@@ -23,23 +23,35 @@ public class FuncionarioBusiness {
 	
 	public void salvarFuncionario(FuncionarioVo funcionarioVo) {
 		try {
-			if(funcionarioVo.getNome().isEmpty())
+			if(funcionarioVo.getNome() == null || funcionarioVo.getNome().isEmpty())
 				throw new IllegalArgumentException("Nome nao pode ser em branco");
 			
-			if(!funcionarioVo.getRowid().isEmpty()) {
-				dao.updateFuncionario(funcionarioVo);
+			if(funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
+				editarFuncionario(funcionarioVo);
 			} else {
-				dao.insertFuncionario(funcionarioVo);
+				criarFuncionario(funcionarioVo);
 			}
 			
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
+	        throw e;
+	    } catch (Exception e) {
 			throw new BusinessException("Nao foi possivel realizar a inclusao do registro");
 		}
 		
 	}
 	
+	public void criarFuncionario(FuncionarioVo funcionarioVo) {
+		dao.insertFuncionario(funcionarioVo);
+	}
+	
 	public void editarFuncionario(FuncionarioVo funcionarioVo) {
-		
+	    if (funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty()) 
+	        throw new IllegalArgumentException("ID do funcionario obrigatorio para atualizacao");
+	    
+	    if(buscarFuncionarioPor(funcionarioVo.getRowid()) == null)
+    		throw new IllegalArgumentException("Esse ID de funcionario nao existe");
+	    
+	    dao.updateFuncionario(funcionarioVo);
 	}
 	
 	public void excluirFuncionario(FuncionarioVo funcionarioVo) {
