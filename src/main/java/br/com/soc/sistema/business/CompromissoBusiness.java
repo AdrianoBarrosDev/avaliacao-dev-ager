@@ -29,9 +29,7 @@ public class CompromissoBusiness {
 		try {
 			
 			FuncionarioBusiness funcionarioBusiness = new FuncionarioBusiness();
-			if(funcionarioBusiness.buscarFuncionarioPor(compromissoVo.getCodigoFuncionario()) == null) {
-				throw new IllegalArgumentException("Nao foi encontrado nenhum funcionario com esse ID");
-			}
+			funcionarioBusiness.buscarFuncionarioPor(compromissoVo.getCodigoFuncionario()); // Lança uma exceção se não encontrar
 			
 			AgendaBusiness agendaBusiness = new AgendaBusiness();
 			if(!agendaBusiness.verificarHorarioPermitidoAgenda(compromissoVo.getCodigoAgenda(), compromissoVo.getHorario())) {
