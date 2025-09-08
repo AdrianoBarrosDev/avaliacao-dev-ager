@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title><s:text name="label.titulo.pagina"/></title>
+		<title><s:text name="label.titulo.pagina.consulta"/></title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
 		<link rel="stylesheet" href="/avaliacao/css/navCustomizada.css" />
 		<link rel="stylesheet" href="/avaliacao/css/global.css" />
@@ -40,7 +40,7 @@
 			
 			<div class="container-fluid p-5" style="margin-left: 260px;">
 			
-				<h1 class="mt-4"><s:text name="label.tituloFuncionarios"/></h1>
+				<h1 class="mt-4"><s:text name="label.titulo.consulta"/></h1>
 			
 				<div class="d-flex justify-content-between align-items-start mb-4 w-100">
 					<s:form action="/filtrarFuncionarios.action" cssClass="w-75">
@@ -154,6 +154,7 @@
 		      
 		      <div class="modal-body">
 		      	<span><s:text name="label.modal.corpo"/></span>
+		      	<p class="m-0 mt-4">● Atenção: esta ação removerá permanentemente todos os compromissos deste funcionário.</p>
 		      </div>
 		      
 		      <div class="modal-footer">

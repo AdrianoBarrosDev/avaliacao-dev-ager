@@ -41,7 +41,7 @@
 
 			<div class="container-fluid p-5" style="margin-left: 260px;">
 				
-				<h1 class="mt-4"><s:text name="%{compromissoVo.rowid != null && !compromissoVo.rowid.isEmpty() ? 'label.editarCompromisso' : 'label.novoCompromisso'}" /></h1>
+				<h1 class="mt-4"><s:text name="%{compromissoVo.rowid != null && !compromissoVo.rowid.isEmpty() ? 'label.titulo.editar' : 'label.titulo.novo'}" /></h1>
 				
 				<s:form action="/salvarCompromissos.action">
 	
