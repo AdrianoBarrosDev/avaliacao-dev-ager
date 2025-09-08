@@ -239,8 +239,11 @@ public class CompromissoBusiness {
 	}
 	
 	public void validarHorarioCompromisso(String horario) {
+
+		if(horario.length() == 5)
+			horario += ":00";
 		
-		DateTimeFormatter formatoPermitido = DateTimeFormatter.ofPattern("HH:mm");
+		DateTimeFormatter formatoPermitido = DateTimeFormatter.ofPattern("HH:mm:ss");
 		
 		try {
 	        LocalTime.parse(horario, formatoPermitido);
