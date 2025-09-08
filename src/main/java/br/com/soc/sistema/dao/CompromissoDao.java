@@ -218,8 +218,10 @@ public class CompromissoDao extends Dao {
 	}
 	
 	public CompromissoVo findByCodigo(Long codigo) {
-		StringBuilder query = new StringBuilder("SELECT rowid id, codigoFuncionario, codigoAgenda, data, horario FROM compromisso ")
-								.append("WHERE rowid = ?");
+		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
+								.append("JOIN funcionario AS F ON C.codigoFuncionario = F.rowid ")
+								.append("JOIN agenda AS A ON C.codigoAgenda = A.rowid ")
+								.append("WHERE C.rowid = ?");
 		try(
 			Connection con = getConexao();
 			PreparedStatement ps = con.prepareStatement(query.toString())) {
@@ -233,7 +235,9 @@ public class CompromissoDao extends Dao {
 					vo = new CompromissoVo();
 					vo.setRowid(rs.getString("id"));
 					vo.setCodigoFuncionario(rs.getString("codigoFuncionario"));
+					vo.setNomeFuncionario(rs.getString("nm_funcionario"));
 					vo.setCodigoAgenda(rs.getString("codigoAgenda"));
+					vo.setNomeAgenda(rs.getString("nm_agenda"));
 					vo.setData(rs.getString("data").toString());
 					vo.setHorario(rs.getString("horario").toString());
 				}
