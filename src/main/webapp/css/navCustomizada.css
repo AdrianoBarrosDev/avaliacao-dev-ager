@@ -52,3 +52,34 @@
 .sidebar a.desativado:hover {
 	background-color: #FAFAFA;
 }
+
+.container-fluid {
+	margin-left: 260px !important;
+}
+
+@media (max-width: 1400px) {
+	
+	.sidebar {
+		width: 100%;
+		height: 100px;
+		position: relative;
+		flex-direction: row;
+		padding: 0px 5rem;
+		border-right: none;
+		border-bottom: 2px solid #F0F7FF;
+		justify-content: space-between;
+		gap: auto;
+	}
+	
+	.sidebar img {
+		margin-top: 0;
+	}
+	
+	.sidebar a {
+		margin-bottom: 0;
+	}
+	
+	.container-fluid {
+		margin-left: 0px !important;
+	}
+}

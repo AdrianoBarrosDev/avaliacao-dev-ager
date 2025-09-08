@@ -15,14 +15,13 @@
 		    <img src="/avaliacao/imagens/LogoBackground.png" class="background-image" style="height: 120%"/>
 		</div>
 		
-		<div class="d-flex justify-content-start aling-items-start w-100" style="position: relative; z-index: 1;">
+		<div class="d-flex justify-content-start aling-items-start w-100 flex-column flex-xxl-row" style="position: relative; z-index: 1;">
 			
 			<nav class="sidebar">
 		
 				<img class="logoNavSoc" src="/avaliacao/imagens/LogoSocNav.png" />
 			
-				<div>
-					
+				<div class="d-xxl-block d-flex justify-content-center align-items-center gap-5">
 					<a href="todosFuncionarios.action" class="desativado gap-3">
 						<img src="/avaliacao/imagens/FuncionariosIcon.png" />
 						Funcionários
