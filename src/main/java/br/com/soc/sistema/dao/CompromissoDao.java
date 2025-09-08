@@ -74,7 +74,8 @@ public class CompromissoDao extends Dao {
 		StringBuilder query = new StringBuilder("SELECT C.rowid id, C.codigoFuncionario, F.nm_funcionario, C.codigoAgenda, A.nm_agenda, C.data, C.horario FROM compromisso AS C ")
 								.append("JOIN funcionario AS F ON F.rowid = C.codigoFuncionario ")
 								.append("JOIN agenda AS A ON A.rowid = C.codigoAgenda ")
-								.append("WHERE C.data BETWEEN ? AND ?");
+								.append("WHERE C.data BETWEEN ? AND ? ")
+								.append("ORDER BY C.data ASC");
 		try(
 			Connection con = getConexao();
 			PreparedStatement ps = con.prepareStatement(query.toString())) {
