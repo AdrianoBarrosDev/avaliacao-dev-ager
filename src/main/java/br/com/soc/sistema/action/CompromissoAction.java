@@ -7,7 +7,6 @@ import java.util.List;
 import br.com.soc.sistema.business.CompromissoBusiness;
 import br.com.soc.sistema.filter.CompromissoFilter;
 import br.com.soc.sistema.infra.Action;
-import br.com.soc.sistema.infra.OpcoesComboBuscarAgenda;
 import br.com.soc.sistema.infra.OpcoesComboBuscarCompromisso;
 import br.com.soc.sistema.vo.CompromissoVo;
 

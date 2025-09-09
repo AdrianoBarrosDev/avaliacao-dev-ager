@@ -15,6 +15,7 @@ local.properties
 .loadpath
 .recommenders
 target/
+relatorios/
 
 # External tool builders
 .externalToolBuilders/

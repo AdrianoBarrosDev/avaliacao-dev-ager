@@ -1,5 +1,6 @@
 package br.com.soc.sistema.business;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -60,8 +61,14 @@ public class RelatorioCompromissoBusiness {
         for(int i = 0; i < 7; i++) {
         	sheet.autoSizeColumn(i);
         }
-
-        try (FileOutputStream fileOut = new FileOutputStream("D:/Adriano/Cursos/Programa de Formação Ager/Projeto Final/Relatório Compromissos.xlsx")) {
+        
+        File pastaRelatorios = new File("relatorios");
+        if (!pastaRelatorios.exists()) {
+        	pastaRelatorios.mkdirs();
+        }
+        
+        File arquivo = new File(pastaRelatorios, "RelatorioCompromissos.xlsx");
+        try (FileOutputStream fileOut = new FileOutputStream(arquivo)) {
             workbook.write(fileOut);
         } catch (IOException e) {
             e.printStackTrace();

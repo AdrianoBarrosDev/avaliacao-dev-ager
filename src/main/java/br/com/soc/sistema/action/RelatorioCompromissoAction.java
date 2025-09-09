@@ -9,7 +9,6 @@ import br.com.soc.sistema.vo.CompromissoVo;
 
 public class RelatorioCompromissoAction extends Action {
 
-	// private RelatorioCompromissoVo relatorioVo = new RelatorioCompromissoVo();
 	private String dataInicial;
 	private String dataFinal;
 	private List<CompromissoVo> compromissos = new ArrayList<>();
