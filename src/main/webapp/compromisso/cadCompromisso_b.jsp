@@ -199,7 +199,7 @@
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title"><s:text name="label.modal.tituloRelatorioCompromissos"/></h5>
+		        <h5 class="modal-title"><s:text name="label.modal.titulo.relatorioCompromissos"/></h5>
 		        
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
